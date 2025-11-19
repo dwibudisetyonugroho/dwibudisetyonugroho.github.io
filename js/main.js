@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 navLinks.style.top = '80px';
                 navLinks.style.left = '0';
                 navLinks.style.width = '100%';
-                navLinks.style.background = 'rgba(10, 10, 10, 0.95)';
+                navLinks.style.background = 'rgba(255, 255, 255, 0.98)';
                 navLinks.style.padding = '2rem';
                 navLinks.style.borderBottom = '1px solid var(--border-color)';
             }
