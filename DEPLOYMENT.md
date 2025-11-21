@@ -3,7 +3,7 @@
 ## 🚀 Automated Deployment
 
 Your portfolio is configured for automatic deployment to GitHub Pages:
-- **URL:** https://budinugroho15.github.io/dbs/
+- **URL:** https://budinugroho15.github.io/data-analyst-portfolio-website/
 - **Trigger:** Every push to `main` branch
 - **Build:** Automated via GitHub Actions
 
@@ -22,7 +22,7 @@ git add .
 git commit -m "Configure for GitHub Pages deployment"
 
 # Add remote (if not already added)
-git remote add origin https://github.com/budinugroho15/dbs.git
+git remote add origin https://github.com/budinugroho15/data-analyst-portfolio-website.git
 
 # Push to main branch
 git push -u origin main
@@ -30,27 +30,12 @@ git push -u origin main
 
 ### 2. Enable GitHub Pages
 
-1. Go to your repository: https://github.com/budinugroho15/dbs
+1. Go to your repository: https://github.com/budinugroho15/data-analyst-portfolio-website
 2. Click **Settings** → **Pages** (in left sidebar)
 3. Under **Source**, select:
    - Source: **GitHub Actions**
 4. Save the settings
 
-### 3. Wait for Deployment
-
-- GitHub Actions will automatically build and deploy
-- Check progress: https://github.com/budinugroho15/dbs/actions
-- First deployment takes ~2-3 minutes
-
-### 4. Visit Your Site
-
-Once deployed, visit: **https://budinugroho15.github.io/dbs/**
-
-## 🔧 Local Testing
-
-Test the production build locally before deploying:
-
-```bash
 # Build for production
 npm run build
 
@@ -62,7 +47,7 @@ npx serve out
 ## 📝 Configuration Summary
 
 - ✅ **Static Export:** Configured in `next.config.ts`
-- ✅ **Base Path:** `/dbs` for repository deployment
+- ✅ **Base Path:** `/data-analyst-portfolio-website` for repository deployment
 - ✅ **GitHub Actions:** Auto-deployment workflow created
 - ✅ **Jekyll Disabled:** `.nojekyll` file added
 
@@ -84,7 +69,7 @@ Every time you push changes to the `main` branch:
 ## 🐛 Troubleshooting
 
 ### Deployment fails
-- Check GitHub Actions logs: https://github.com/budinugroho15/dbs/actions
+- Check GitHub Actions logs: https://github.com/budinugroho15/data-analyst-portfolio-website/actions
 - Verify `package.json` dependencies are correct
 - Ensure all imports are valid
 
@@ -100,5 +85,5 @@ Every time you push changes to the `main` branch:
 ## 📊 Deployment Status
 
 Check deployment status anytime:
-- **Actions:** https://github.com/budinugroho15/dbs/actions
-- **Deployments:** https://github.com/budinugroho15/dbs/deployments
+- **Actions:** https://github.com/budinugroho15/data-analyst-portfolio-website/actions
+- **Deployments:** https://github.com/budinugroho15/data-analyst-portfolio-website/deployments
