@@ -3,7 +3,7 @@
 ## 🚀 Automated Deployment
 
 Your portfolio is configured for automatic deployment to GitHub Pages:
-- **URL:** https://budinugroho15.github.io/data-analyst-portfolio-website/
+- **URL:** https://dwibudisetyonugroho.github.io/
 - **Trigger:** Every push to `main` branch
 - **Build:** Automated via GitHub Actions
 
@@ -22,7 +22,7 @@ git add .
 git commit -m "Configure for GitHub Pages deployment"
 
 # Add remote (if not already added)
-git remote add origin https://github.com/budinugroho15/data-analyst-portfolio-website.git
+git remote add origin https://github.com/dwibudisetyonugroho/dwibudisetyonugroho.github.io.git
 
 # Push to main branch
 git push -u origin main
@@ -30,7 +30,7 @@ git push -u origin main
 
 ### 2. Enable GitHub Pages
 
-1. Go to your repository: https://github.com/budinugroho15/data-analyst-portfolio-website
+1. Go to your repository: https://github.com/dwibudisetyonugroho/dwibudisetyonugroho.github.io
 2. Click **Settings** → **Pages** (in left sidebar)
 3. Under **Source**, select:
    - Source: **GitHub Actions**
@@ -47,7 +47,7 @@ npx serve out
 ## 📝 Configuration Summary
 
 - ✅ **Static Export:** Configured in `next.config.ts`
-- ✅ **Base Path:** `/data-analyst-portfolio-website` for repository deployment
+- ✅ **Root Deployment:** No base path needed (user site)
 - ✅ **GitHub Actions:** Auto-deployment workflow created
 - ✅ **Jekyll Disabled:** `.nojekyll` file added
 
@@ -69,7 +69,7 @@ Every time you push changes to the `main` branch:
 ## 🐛 Troubleshooting
 
 ### Deployment fails
-- Check GitHub Actions logs: https://github.com/budinugroho15/data-analyst-portfolio-website/actions
+- Check GitHub Actions logs: https://github.com/dwibudisetyonugroho/dwibudisetyonugroho.github.io/actions
 - Verify `package.json` dependencies are correct
 - Ensure all imports are valid
 
@@ -85,5 +85,5 @@ Every time you push changes to the `main` branch:
 ## 📊 Deployment Status
 
 Check deployment status anytime:
-- **Actions:** https://github.com/budinugroho15/data-analyst-portfolio-website/actions
-- **Deployments:** https://github.com/budinugroho15/data-analyst-portfolio-website/deployments
+- **Actions:** https://github.com/dwibudisetyonugroho/dwibudisetyonugroho.github.io/actions
+- **Deployments:** https://github.com/dwibudisetyonugroho/dwibudisetyonugroho.github.io/deployments
