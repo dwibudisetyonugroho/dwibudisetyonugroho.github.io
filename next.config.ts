@@ -2,8 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: 'export',
-  basePath: '/dbs',
-  assetPrefix: '/dbs/',
+  // Temporarily removed basePath to force cache refresh
+  // basePath: '/dbs',
+  // assetPrefix: '/dbs/',
   images: {
     unoptimized: true,
   },
