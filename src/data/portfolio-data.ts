@@ -175,7 +175,7 @@ export const INTERNSHIPS = [
             'Mastered Big Data Processing and Scheduling'
         ],
         credentialId: '352967IAPDGIK3112025',
-        verificationUrl: '#',
+        verificationUrl: '/certificates/Rakamin-Kimia-Farma-PBI.pdf',
         platform: 'Kimia Farma'
     }
 ]
