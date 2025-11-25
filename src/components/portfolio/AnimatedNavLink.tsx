@@ -15,7 +15,7 @@ interface AnimatedNavLinkProps {
 
 export const AnimatedNavLink = ({ href, text, className = '', onClick, dropdownItems, isActive = false }: AnimatedNavLinkProps) => {
     const [isHovered, setIsHovered] = useState(false)
-    const hoverColor = '#A7C7E7' // Pastel Blue for professional hover effect
+    const hoverColor = '#FF6B6B' // Red color matching Connect button
     const letters = text.split('')
 
     const container = {
@@ -65,35 +65,41 @@ export const AnimatedNavLink = ({ href, text, className = '', onClick, dropdownI
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            {/* Hover Circle Indicator */}
-            <motion.div
-                className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-2 h-2 rounded-full"
-                style={{ backgroundColor: hoverColor }}
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: isHovered ? 1 : 0, scale: isHovered ? 1 : 0 }}
-                transition={{ duration: 0, ease: "linear" }}
-            />
-
             <motion.a
                 href={href}
-                className={`relative inline-flex overflow-hidden ${className}`}
+                className={`relative inline-flex items-center gap-2 overflow-hidden ${className}`}
                 style={{ textDecoration: 'none' }}
                 onClick={onClick}
                 variants={container}
                 initial="initial"
                 whileTap={{ scale: 0.95 }}
             >
-                {letters.map((letter, index) => (
-                    <motion.span
-                        key={index}
-                        variants={child}
-                        className="inline-block"
-                    >
-                        {letter === ' ' ? '\u00A0' : letter}
-                    </motion.span>
-                ))}
+                {/* Circle Indicator - blinks for active section, shows on hover for others */}
+                <motion.div
+                    className={`w-2 h-2 rounded-full ${isActive ? 'animate-blink-sharp' : ''}`}
+                    style={{ backgroundColor: hoverColor }}
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{
+                        opacity: isActive ? 1 : (isHovered ? 1 : 0),
+                        scale: isActive ? 1 : (isHovered ? 1 : 0)
+                    }}
+                    transition={{ duration: 0, ease: "linear" }}
+                />
+
+                <span className="inline-flex">
+                    {letters.map((letter, index) => (
+                        <motion.span
+                            key={index}
+                            variants={child}
+                            className="inline-block"
+                        >
+                            {letter === ' ' ? '\u00A0' : letter}
+                        </motion.span>
+                    ))}
+                </span>
+
                 {dropdownItems && dropdownItems.length > 0 && (
-                    <ChevronDown className={`h-4 w-4 ml-1 transition-transform duration-300 ${isHovered ? 'rotate-180' : ''}`} />
+                    <ChevronDown className={`h-3 w-3 transition-transform duration-300 ${isHovered ? 'rotate-180' : ''}`} />
                 )}
             </motion.a>
 

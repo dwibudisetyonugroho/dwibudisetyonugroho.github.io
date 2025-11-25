@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { ExternalLink, Award, CheckCircle2, BookOpen, ChevronUp, ChevronDown, Copy } from 'lucide-react'
+import { ExternalLink, Award, CheckCircle2, BookOpen, ChevronUp, ChevronDown, Copy, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { CERTIFICATES } from '@/data/portfolio-data'
@@ -72,14 +72,22 @@ export const CertificatesSection = () => {
                                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#5A6E58] via-[#A3B18A] to-[#5A6E58]" />
 
                                 <CardContent className="p-8">
-                                    {/* IBM Logo - Better Implementation */}
-                                    <div className="absolute top-8 right-8">
-                                        <div className="w-28 h-14 flex items-center justify-center bg-white rounded-md border border-gray-100 shadow-sm p-2">
-                                            <img
-                                                src="https://www.ibm.com/brand/experience-guides/developer/b1db1ae501d522a1a4b49613fe07c9f1/01_8-bar-positive.svg"
-                                                alt="IBM Logo"
-                                                className="w-full h-full object-contain"
-                                            />
+                                    {/* Certificate Logo - Conditional based on issuer */}
+                                    <div className="absolute top-6 right-6">
+                                        <div className="w-32 h-16 flex items-center justify-center bg-white rounded-lg p-3">
+                                            {cert.issuer === 'IBM' ? (
+                                                <img
+                                                    src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/http://coursera-university-assets.s3.amazonaws.com/c0/87a10033a311e892619b85c6fd62bb/IBM-200x48.png?auto=format%2Ccompress&dpr=1&h=45"
+                                                    alt="IBM Logo"
+                                                    className="w-full h-full object-contain"
+                                                />
+                                            ) : cert.issuer === 'MySkill' ? (
+                                                <img
+                                                    src="https://myskill.id/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fmyskill-logo.0b4d0f9d.png&w=96&q=75"
+                                                    alt="MySkill Logo"
+                                                    className="w-full h-full object-contain"
+                                                />
+                                            ) : null}
                                         </div>
                                     </div>
 
@@ -110,7 +118,7 @@ export const CertificatesSection = () => {
                                                 {cert.startDate && cert.endDate && (
                                                     <span className="font-medium flex items-center gap-1.5">
                                                         <span className="w-1.5 h-1.5 rounded-full bg-[#5A6E58]" />
-                                                        {cert.startDate} - {cert.endDate}
+                                                        {cert.startDate === cert.endDate ? cert.startDate : `${cert.startDate} - ${cert.endDate}`}
                                                     </span>
                                                 )}
                                                 {cert.completionTime && (
@@ -150,7 +158,9 @@ export const CertificatesSection = () => {
                                                     <ul className="grid gap-2 sm:grid-cols-2">
                                                         {cert.courses.map((course, idx) => (
                                                             <li key={idx} className="flex items-start gap-2 text-sm text-[#3C4F40]">
-                                                                <span className="text-[#5A6E58] mt-1 text-[10px]">●</span>
+                                                                <span className="text-[#5A6E58] mt-1 text-[10px] font-semibold min-w-[16px]">
+                                                                    {idx + 1}.
+                                                                </span>
                                                                 <span>{course}</span>
                                                             </li>
                                                         ))}
@@ -161,7 +171,7 @@ export const CertificatesSection = () => {
                                     )}
 
 
-                                    {/* Compact Skills Section with Toggle */}
+                                    {/* Simplified Skills Section - Flat List with Show More */}
                                     {cert.skillCategories && (
                                         <div className="mt-6 pt-6 border-t border-[#E0E0E0]">
                                             <div className="flex items-center justify-between mb-4">
@@ -170,27 +180,20 @@ export const CertificatesSection = () => {
                                                     onClick={() => toggleAllSkills(index)}
                                                     className="text-xs font-semibold text-[#5A6E58] hover:text-[#4B5E4A] transition-colors duration-200 uppercase tracking-wide flex items-center gap-1"
                                                 >
-                                                    {showAllSkills[index] ? 'Show Less' : `View All (${Object.keys(cert.skillCategories).length} Categories)`}
+                                                    {showAllSkills[index] ? 'Show Less' : 'Show More'}
                                                     {showAllSkills[index] ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
                                                 </button>
                                             </div>
-                                            <div className="space-y-4">
-                                                {Object.entries(cert.skillCategories)
-                                                    .slice(0, showAllSkills[index] ? undefined : 3)
-                                                    .map(([category, skills]) => (
-                                                        <div key={category}>
-                                                            <h5 className="text-xs font-semibold text-[#5F6368] mb-2 uppercase tracking-wide">{category}</h5>
-                                                            <div className="flex flex-wrap gap-2">
-                                                                {skills.map((skill, skillIdx) => (
-                                                                    <span
-                                                                        key={skillIdx}
-                                                                        className="px-3 py-1 bg-[#F1F3F4] text-[#3C4F40] text-xs font-medium rounded-md border border-[#E0E0E0] hover:bg-[#E8F0FE] hover:text-[#1967D2] hover:border-[#D2E3FC] transition-all duration-200"
-                                                                    >
-                                                                        {skill}
-                                                                    </span>
-                                                                ))}
-                                                            </div>
-                                                        </div>
+                                            <div className={`flex flex-wrap gap-2 ${!showAllSkills[index] ? 'max-h-[32px] overflow-hidden' : ''}`}>
+                                                {Object.values(cert.skillCategories)
+                                                    .flat()
+                                                    .map((skill, skillIdx) => (
+                                                        <span
+                                                            key={skillIdx}
+                                                            className="px-3 py-1 bg-[#F1F3F4] text-[#3C4F40] text-xs font-medium rounded-md border border-[#E0E0E0] hover:bg-[#E8F0FE] hover:text-[#1967D2] hover:border-[#D2E3FC] transition-all duration-200"
+                                                        >
+                                                            {skill}
+                                                        </span>
                                                     ))}
                                             </div>
                                         </div>
@@ -230,19 +233,35 @@ export const CertificatesSection = () => {
 
                                         {cert.platform && (
                                             <div className="flex items-center gap-2">
-                                                <span className="text-[#5F6368] text-xs font-medium uppercase tracking-wide">Verified by</span>
-                                                <a
-                                                    href="https://www.coursera.org/professional-certificates/ibm-data-analyst"
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="hover:opacity-80 transition-opacity"
-                                                >
-                                                    <img
-                                                        src="https://upload.wikimedia.org/wikipedia/commons/9/97/Coursera-Logo_600x600.svg"
-                                                        alt="Coursera Logo"
-                                                        className="h-5 w-auto"
-                                                    />
-                                                </a>
+                                                <span className="text-[#5F6368] text-xs font-medium tracking-wide">Visit Official Page</span>
+                                                <ArrowRight className="h-3.5 w-3.5 text-[#5F6368]" />
+                                                {cert.issuer === 'IBM' ? (
+                                                    <a
+                                                        href="https://www.coursera.org/professional-certificates/ibm-data-analyst"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="hover:opacity-80 transition-opacity"
+                                                    >
+                                                        <img
+                                                            src="https://about.coursera.org/static/whiteCoursera-23ec484f7091914430ce19b07d09aedf.svg"
+                                                            alt="Coursera Logo"
+                                                            className="h-12 w-auto"
+                                                        />
+                                                    </a>
+                                                ) : cert.issuer === 'MySkill' ? (
+                                                    <a
+                                                        href="https://myskill.id/learning-path/microsoft-excel-word-powerpoint"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="hover:opacity-80 transition-opacity"
+                                                    >
+                                                        <img
+                                                            src="https://myskill.id/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fmyskill-logo.0b4d0f9d.png&w=96&q=75"
+                                                            alt="MySkill Logo"
+                                                            className="h-6 w-auto"
+                                                        />
+                                                    </a>
+                                                ) : null}
                                             </div>
                                         )}
                                     </div>

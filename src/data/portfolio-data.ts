@@ -15,8 +15,8 @@ export const CERTIFICATES = [
         title: 'IBM Data Analyst Professional Certificate',
         issuer: 'IBM',
         date: 'Nov 5, 2024',
-        startDate: 'Oct 2024',
-        endDate: 'Nov 2024',
+        startDate: 'Oct 2025',
+        endDate: 'Nov 2025',
         completionTime: '2 Months',
         courseCount: '11',
         certificateType: 'Professional Certificate',
@@ -90,45 +90,93 @@ export const CERTIFICATES = [
                 'Professional Networking'
             ]
         }
+    },
+    {
+        id: 'myskill-excel',
+        title: 'Microsoft Excel Professional Skill Certificate',
+        issuer: 'MySkill',
+        date: 'Sep 2025',
+        startDate: 'Sep 2025',
+        endDate: 'Sep 2025',
+        completionTime: '1 Month',
+        courseCount: '5',
+        certificateType: 'Professional Skill',
+        level: 'Professional',
+        description: 'Completed a Full Learning Path with Professional Skill during 59 hours in Microsoft Excel. This comprehensive program covers Excel from basic to advanced levels, including data manipulation, forecasting, regression, and statistical analysis. Gained hands-on experience with data cleansing, visualization, pivot tables, Power Pivot, VBA macros, and advanced analytical techniques.',
+        courses: [
+            'Microsoft Excel Basic (Cleanse, Sort, Filter, Format, Aggregate, Conditional IF)',
+            'Microsoft Excel Intermediate (Lookup & Index Match, Data Visualization, Pivot Table, Math Function, Date & Time Manipulation, Logical & Information Function, Dynamic Array, Referencing Cell & Text)',
+            'Microsoft Excel Advanced (Power Pivot, What-If Analysis, Macro VBA)',
+            'Data Manipulation',
+            'Forecasting, Regression and Statistic (Time Series Analysis, Linear Regression, Forecasting Time Series, Descriptive Statistic)'
+        ],
+        credentialId: 'MS-3/9/2025-FWQ2FpFLDH393DhfzzzY',
+        verificationUrl: '/certificates/Microsoft-Excel-Certificate.pdf',
+        platform: 'MySkill',
+        skillCategories: {
+            'Excel Fundamentals': [
+                'Data Cleansing',
+                'Sorting & Filtering',
+                'Data Formatting',
+                'Aggregate Functions',
+                'Conditional IF'
+            ],
+            'Intermediate Excel': [
+                'VLOOKUP & HLOOKUP',
+                'INDEX MATCH',
+                'Pivot Tables',
+                'Data Visualization',
+                'Math Functions',
+                'Date & Time Manipulation',
+                'Logical Functions',
+                'Dynamic Arrays',
+                'Cell Referencing'
+            ],
+            'Advanced Excel': [
+                'Power Pivot',
+                'What-If Analysis',
+                'Macro VBA',
+                'Automation'
+            ],
+            'Data Analysis': [
+                'Data Manipulation',
+                'Time Series Analysis',
+                'Linear Regression',
+                'Forecasting',
+                'Descriptive Statistics'
+            ]
+        }
     }
 ]
 
 export const INTERNSHIPS = [
     {
-        id: 'techstart-intern',
-        title: 'Data Analytics Intern',
-        company: 'TechStart Inc.',
-        period: 'Summer 2021',
-        description: 'Assisted in developing customer segmentation models and created automated dashboards for sales tracking.',
+        id: 'kimia-farma-intern',
+        title: 'Big Data Analytics Project-Based Internship',
+        company: 'Kimia Farma',
+        period: 'Oct 2025 - Nov 2025',
+        startDate: 'Oct 2025',
+        endDate: 'Nov 2025',
+        completionTime: '2 Months',
+        certificateType: 'Project-Based Internship',
+        level: 'Excellent',
+        description: 'Successfully completed the Kimia Farma Big Data Analytics Project-Based Internship Program, demonstrating Excellent performance as a student. Gained hands-on experience in data analysis, big data processing, and scheduling.',
+        skills: [
+            'Data Analysis',
+            'Big Data',
+            'Big Data Processing',
+            'Big Data Scheduling',
+            'Data Analytics',
+            'Project Management'
+        ],
         achievements: [
-            'Built 5 interactive dashboards',
-            'Analyzed 100K+ customer records',
-            'Presented findings to executive team'
-        ]
-    },
-    {
-        id: 'datacorp-intern',
-        title: 'Business Intelligence Intern',
-        company: 'DataCorp Solutions',
-        period: 'Fall 2020',
-        description: 'Supported the BI team in creating reports and performing ad-hoc analysis for various business units.',
-        achievements: [
-            'Created 20+ weekly reports',
-            'Reduced reporting time by 30%',
-            'Trained 10+ team members'
-        ]
-    },
-    {
-        id: 'university-research',
-        title: 'Research Assistant - Data Analytics',
-        company: 'University Research Lab',
-        period: 'Spring 2020',
-        description: 'Conducted statistical analysis for academic research projects on consumer behavior patterns.',
-        achievements: [
-            'Co-authored 2 research papers',
-            'Managed datasets of 50K+ records',
-            'Presented at 3 conferences'
-        ]
+            'Achieved Excellent rating with 89.05 average score',
+            'Completed Big Data Analytics project',
+            'Mastered Big Data Processing and Scheduling'
+        ],
+        credentialId: '352967IAPDGIK3112025',
+        verificationUrl: '#',
+        platform: 'Kimia Farma'
     }
 ]
 
@@ -139,20 +187,6 @@ export const PROJECTS = [
         description: 'Machine learning model that segments customers based on behavior, increasing targeted marketing effectiveness by 35%.',
         technologies: ['Python', 'Scikit-learn', 'Pandas', 'Tableau'],
         impact: '35% increase in marketing ROI'
-    },
-    {
-        id: 'sales-dashboard',
-        title: 'Real-Time Sales Dashboard',
-        description: 'Interactive dashboard providing real-time insights into sales performance across multiple regions.',
-        technologies: ['SQL', 'Power BI', 'DAX', 'Azure'],
-        impact: '50% faster decision making'
-    },
-    {
-        id: 'predictive-maintenance',
-        title: 'Predictive Maintenance System',
-        description: 'IoT-based predictive maintenance system reducing equipment downtime by 40% through advanced analytics.',
-        technologies: ['Python', 'TensorFlow', 'Time Series Analysis', 'AWS'],
-        impact: '40% reduction in downtime'
     }
 ]
 

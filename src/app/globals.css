@@ -141,3 +141,12 @@
 }
 
 /* Navigation hover effect removed - using Tailwind classes instead */
+
+@keyframes blink-sharp {
+  0%, 49.9% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.animate-blink-sharp {
+  animation: blink-sharp 2s infinite;
+}
