@@ -51,6 +51,7 @@ export const CERTIFICATES = [
             'Data Analyst Career Guide and Interview Preparation'
         ],
         credentialId: 'FPC586MR2YCN',
+        certificateUrl: '/certificates/IBM-Data-Analyst-Certificate.pdf',
         verificationUrl: 'https://coursera.org/verify/professional-cert/FPC586MR2YCN',
         platform: 'Coursera',
         skillCategories: {

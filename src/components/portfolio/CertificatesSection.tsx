@@ -202,15 +202,44 @@ export const CertificatesSection = () => {
                                     {/* Footer with Actions */}
                                     <div className="mt-8 pt-6 border-t border-[#E0E0E0] bg-[#F8F9FA] -mx-8 -mb-8 px-8 py-4 flex items-center justify-between flex-wrap gap-4">
                                         <div className="flex items-center gap-4 flex-wrap">
-                                            <Button
-                                                className="bg-[#5A6E58] hover:bg-[#4B5E4A] text-white px-6 py-2 h-10 shadow-sm hover:shadow transition-all"
-                                                asChild
-                                            >
-                                                <a href={cert.verificationUrl || '#'} target="_blank" rel="noopener noreferrer">
-                                                    <ExternalLink className="h-4 w-4 mr-2" />
-                                                    View Certificate
-                                                </a>
-                                            </Button>
+                                            {/* Show two buttons if certificateUrl exists (for IBM), otherwise show single button */}
+                                            {(cert as any).certificateUrl ? (
+                                                <>
+                                                    {/* Primary Button: View Certificate PDF */}
+                                                    <Button
+                                                        className="bg-[#5A6E58] hover:bg-[#4B5E4A] text-white px-6 py-2 h-10 shadow-sm hover:shadow transition-all"
+                                                        asChild
+                                                    >
+                                                        <a href={(cert as any).certificateUrl} target="_blank" rel="noopener noreferrer">
+                                                            <ExternalLink className="h-4 w-4 mr-2" />
+                                                            View Certificate
+                                                        </a>
+                                                    </Button>
+
+                                                    {/* Secondary Button: Verify on Coursera */}
+                                                    <Button
+                                                        variant="outline"
+                                                        className="border-[#5A6E58] text-[#5A6E58] hover:bg-[#5A6E58] hover:text-white px-6 py-2 h-10 transition-all"
+                                                        asChild
+                                                    >
+                                                        <a href={cert.verificationUrl || '#'} target="_blank" rel="noopener noreferrer">
+                                                            <ExternalLink className="h-4 w-4 mr-2" />
+                                                            Verify on Coursera
+                                                        </a>
+                                                    </Button>
+                                                </>
+                                            ) : (
+                                                /* Single Button: For other certificates */
+                                                <Button
+                                                    className="bg-[#5A6E58] hover:bg-[#4B5E4A] text-white px-6 py-2 h-10 shadow-sm hover:shadow transition-all"
+                                                    asChild
+                                                >
+                                                    <a href={cert.verificationUrl || '#'} target="_blank" rel="noopener noreferrer">
+                                                        <ExternalLink className="h-4 w-4 mr-2" />
+                                                        View Certificate
+                                                    </a>
+                                                </Button>
+                                            )}
 
                                             {cert.credentialId && (
                                                 <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded border border-[#E0E0E0]">
