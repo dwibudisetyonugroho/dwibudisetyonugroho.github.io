@@ -1,6 +1,10 @@
-import { Mail, Phone, MapPin, ExternalLink } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+'use client'
+
+import { Mail, Phone, MapPin, Linkedin, Github } from 'lucide-react'
+import { motion, Variants } from 'framer-motion'
 import { CONTACT_INFO } from '@/data/portfolio-data'
+import { toast } from 'sonner'
+import { cardHoverVariants } from '@/lib/animations'
 
 const WhatsAppIcon = ({ className }: { className?: string }) => (
     <svg
@@ -13,74 +17,161 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
     </svg>
 )
 
-export const ContactSection = () => (
-    <section id="contact" className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-4xl font-bold text-center mb-16 text-[#0F172A]">Get in touch</h2>
-            <div className="max-w-5xl mx-auto">
-                <p className="text-lg text-[#475569] mb-12 text-center max-w-2xl mx-auto leading-relaxed">
-                    I'm always interested in discussing new opportunities, challenging projects, or sharing insights about data analytics. Feel free to reach out!
-                </p>
+const contactMethods = [
+    {
+        icon: Mail,
+        label: 'Email',
+        value: CONTACT_INFO.email,
+        copyValue: CONTACT_INFO.email,
+        href: `mailto:${CONTACT_INFO.email}`,
+        hoverColor: 'hover:bg-[#EA4335]',
+        hoverIconColor: 'group-hover:text-white'
+    },
+    {
+        icon: Linkedin,
+        label: 'LinkedIn',
+        value: 'Dwi Budi Setyonugroho',
+        href: CONTACT_INFO.linkedin,
+        hoverColor: 'hover:bg-[#0A66C2]',
+        hoverIconColor: 'group-hover:text-white',
+        external: true
+    },
+    {
+        icon: Github,
+        label: 'GitHub',
+        value: 'dwibudisetyonugroho',
+        href: CONTACT_INFO.github,
+        hoverColor: 'hover:bg-[#333]',
+        hoverIconColor: 'group-hover:text-white',
+        external: true
+    },
+    {
+        icon: Phone,
+        label: 'Phone',
+        value: CONTACT_INFO.phone,
+        copyValue: CONTACT_INFO.phone.replace(/\s/g, ''),
+        href: `tel:${CONTACT_INFO.phone.replace(/\s/g, '')}`,
+        hoverColor: 'hover:bg-primary',
+        hoverIconColor: 'group-hover:text-white'
+    },
+    {
+        icon: WhatsAppIcon,
+        label: 'WhatsApp',
+        value: 'Chat with me',
+        href: `https://wa.me/${CONTACT_INFO.phone.replace(/\D/g, '')}`,
+        hoverColor: 'hover:bg-[#25D366]',
+        hoverIconColor: 'group-hover:text-white',
+        external: true
+    }
+]
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                    {/* Email Card */}
-                    <a
-                        href={`mailto:${CONTACT_INFO.email}`}
-                        className="group bg-white border border-[#E2E8F0] p-6 hover:shadow-lg hover:border-[#5D4037] transition-all duration-200"
-                    >
-                        <div className="flex flex-col items-center text-center">
-                            <div className="p-3 bg-[#EFEBE9] mb-4 group-hover:bg-[#5D4037] transition-colors duration-200">
-                                <Mail className="h-6 w-6 text-[#5D4037] group-hover:text-white transition-colors duration-200" />
+const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.1
+        }
+    }
+}
+
+const itemVariants: Variants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+        y: 0,
+        opacity: 1,
+        transition: {
+            duration: 0.5,
+            ease: "easeOut"
+        }
+    }
+}
+
+export const ContactSection = () => {
+    const handleCopy = (e: React.MouseEvent, value: string, label: string) => {
+        // We don't preventDefault so the mailto/tel still triggers, 
+        // but we copy the text as a backup.
+        navigator.clipboard.writeText(value);
+        toast.success(`${label} copied to clipboard!`, {
+            description: value,
+        });
+    }
+
+    return (
+        <section id="contact" className="py-24 bg-gray-50 relative overflow-hidden">
+            {/* Subtle Background Elements */}
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+            
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+                <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="text-center mb-16"
+                >
+                    <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-foreground tracking-tight">Get in touch</h2>
+                    <p className="text-lg text-foreground/60 max-w-2xl mx-auto leading-relaxed">
+                        I'm currently looking for new opportunities and collaborations in data analytics. 
+                        Whether you have a question or just want to connect, my inbox is always open.
+                    </p>
+                </motion.div>
+
+                <motion.div 
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-16"
+                >
+                    {contactMethods.map((method, index) => (
+                        <motion.a
+                            key={index}
+                            href={method.href}
+                            target={method.external ? "_blank" : undefined}
+                            rel={method.external ? "noopener noreferrer" : undefined}
+                            variants={itemVariants}
+                            whileHover="hover"
+                            onClick={(e) => {
+                                if (method.copyValue) {
+                                    handleCopy(e, method.copyValue, method.label);
+                                }
+                            }}
+                            className={`group bg-white p-8 rounded-none shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col items-center text-center cursor-pointer ${method.hoverColor}`}
+                        >
+                            <div className={`p-4 rounded-none bg-secondary/10 mb-5 group-hover:scale-110 group-hover:bg-white/20 transition-all duration-300`}>
+                                <method.icon className={`h-7 w-7 text-primary group-hover:text-white transition-colors duration-300`} />
                             </div>
-                            <h3 className="text-sm font-bold text-[#64748B] uppercase tracking-wider mb-2">Email</h3>
-                            <p className="text-[#0F172A] font-medium break-all group-hover:text-[#B87333] transition-colors duration-200">{CONTACT_INFO.email}</p>
-                        </div>
-                    </a>
+                            <h3 className="text-xs font-bold text-foreground/40 uppercase tracking-[0.2em] mb-3 group-hover:text-white/70 transition-colors duration-300">
+                                {method.label}
+                            </h3>
+                            <p className="text-foreground font-semibold break-all group-hover:text-white transition-colors duration-300">
+                                {method.value}
+                            </p>
+                        </motion.a>
+                    ))}
+                </motion.div>
 
-                    {/* Phone Card */}
-                    <a
-                        href={`tel:${CONTACT_INFO.phone.replace(/\s/g, '')}`}
-                        className="group bg-white border border-[#E2E8F0] p-6 hover:shadow-lg hover:border-[#5D4037] transition-all duration-200"
-                    >
-                        <div className="flex flex-col items-center text-center">
-                            <div className="p-3 bg-[#EFEBE9] mb-4 group-hover:bg-[#5D4037] transition-colors duration-200">
-                                <Phone className="h-6 w-6 text-[#5D4037] group-hover:text-white transition-colors duration-200" />
+                {/* Location Pill */}
+                <motion.div 
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    className="flex justify-center"
+                >
+                    <div className="inline-flex items-center gap-4 bg-white/80 backdrop-blur-sm rounded-full px-10 py-5 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
+                        <div className="relative">
+                            <div className="absolute inset-0 bg-secondary/20 rounded-full animate-ping" />
+                            <div className="relative p-2.5 bg-secondary/10 rounded-full">
+                                <MapPin className="h-5 w-5 text-secondary" />
                             </div>
-                            <h3 className="text-sm font-bold text-[#64748B] uppercase tracking-wider mb-2">Phone</h3>
-                            <p className="text-[#0F172A] font-medium group-hover:text-[#B87333] transition-colors duration-200">{CONTACT_INFO.phone}</p>
                         </div>
-                    </a>
-
-                    {/* WhatsApp Card */}
-                    <a
-                        href={`https://wa.me/${CONTACT_INFO.phone.replace(/\D/g, '')}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group bg-white border border-[#E2E8F0] p-6 hover:shadow-lg hover:border-[#5D4037] transition-all duration-200"
-                    >
-                        <div className="flex flex-col items-center text-center">
-                            <div className="p-3 bg-[#EFEBE9] mb-4 group-hover:bg-[#5D4037] transition-colors duration-200">
-                                <WhatsAppIcon className="h-6 w-6 text-[#5D4037] group-hover:text-white transition-colors duration-200" />
-                            </div>
-                            <h3 className="text-sm font-bold text-[#64748B] uppercase tracking-wider mb-2">WhatsApp</h3>
-                            <p className="text-[#0F172A] font-medium group-hover:text-[#B87333] transition-colors duration-200">Chat Now</p>
-                        </div>
-                    </a>
-                </div>
-
-                {/* Location - Centered Bottom */}
-                <div className="flex justify-center">
-                    <div className="inline-flex items-center gap-3 bg-white border border-[#E2E8F0] rounded-full px-8 py-4 shadow-sm hover:shadow-md transition-all duration-200">
-                        <div className="p-2 bg-[#F1F5F9] rounded-full">
-                            <MapPin className="h-5 w-5 text-[#64748B]" />
-                        </div>
-                        <div>
-                            <span className="text-sm font-bold text-[#64748B] uppercase tracking-wider mr-2">Based in:</span>
-                            <span className="text-[#0F172A] font-medium">{CONTACT_INFO.location}</span>
+                        <div className="flex flex-col">
+                            <span className="text-[10px] font-bold text-foreground/40 uppercase tracking-widest">Currently Based</span>
+                            <span className="text-foreground font-bold tracking-tight">{CONTACT_INFO.location}</span>
                         </div>
                     </div>
-                </div>
+                </motion.div>
             </div>
-        </div>
-    </section>
-)
+        </section>
+    )
+}

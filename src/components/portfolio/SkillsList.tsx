@@ -2,12 +2,15 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { ChevronUp, ChevronDown } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { staggerContainer, staggerItem } from '@/lib/animations'
 
 interface SkillsListProps {
     skills: string[]
+    title?: string
 }
 
-export const SkillsList = ({ skills }: SkillsListProps) => {
+export const SkillsList = ({ skills, title = "Skills & Technologies" }: SkillsListProps) => {
     const [isExpanded, setIsExpanded] = useState(false)
     const [showButton, setShowButton] = useState(false)
     const containerRef = useRef<HTMLDivElement>(null)
@@ -32,30 +35,41 @@ export const SkillsList = ({ skills }: SkillsListProps) => {
     return (
         <div className="mt-6 pt-6 mb-6 border-t border-[#E2E8F0]">
             <div className="flex items-center justify-between mb-4">
-                <h4 className="text-sm font-bold text-[#0F172A] uppercase tracking-wider">Skills & Technologies</h4>
+                <h4 className="text-sm font-bold text-black uppercase tracking-wider">{title}</h4>
                 {showButton && (
                     <button
                         onClick={() => setIsExpanded(!isExpanded)}
-                        className="text-xs font-semibold text-[#5D4037] hover:text-[#B87333] transition-colors duration-200 uppercase tracking-wide flex items-center gap-1"
+                        className="text-xs font-bold text-black/40 hover:text-black item-hover uppercase tracking-wide flex items-center gap-1"
                     >
                         {isExpanded ? 'Show Less' : 'Show More'}
                         {isExpanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
                     </button>
                 )}
             </div>
-            <div
+            <motion.div
                 ref={containerRef}
-                className={`flex flex-wrap gap-2 ${!isExpanded ? 'max-h-[32px] overflow-hidden' : ''}`}
+                initial={false}
+                animate={{ height: isExpanded || !showButton ? "auto" : 32 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="overflow-hidden"
             >
-                {skills.map((skill, idx) => (
-                    <span
-                        key={idx}
-                        className="px-3 py-1 bg-[#F1F5F9] text-[#475569] text-xs font-medium border border-[#E2E8F0] hover:bg-[#EFEBE9] hover:text-[#5D4037] hover:border-[#D7CCC8] transition-all duration-200"
-                    >
-                        {skill}
-                    </span>
-                ))}
-            </div>
+                <motion.div
+                    className="flex flex-wrap gap-2"
+                    variants={staggerContainer}
+                    initial="hidden"
+                    animate="visible"
+                >
+                    {skills.map((skill, index) => (
+                        <motion.span
+                            key={index}
+                            variants={staggerItem}
+                            className="px-3 py-1.5 bg-slate-50 text-black/70 text-xs font-bold border border-slate-200 hover:bg-slate-100 hover:text-black hover:border-slate-300 item-hover"
+                        >
+                            {skill}
+                        </motion.span>
+                    ))}
+                </motion.div>
+            </motion.div>
         </div>
     )
 }

@@ -52,11 +52,16 @@ export const AnimatedLogo = () => {
                         opacity: showBrackets ? 1 : 0
                     }}
                     transition={{
-                        duration: 0.3,
-                        ease: "easeInOut",
-                        layout: { duration: 0.3, ease: "easeInOut" }
+                        type: "spring",
+                        stiffness: 350,
+                        damping: 28,
+                        layout: {
+                            type: "spring",
+                            stiffness: 350,
+                            damping: 28
+                        }
                     } as any}
-                    className="overflow-hidden whitespace-nowrap text-2xl font-bold text-[#0F172A] font-mono"
+                    className="overflow-hidden whitespace-nowrap text-2xl font-bold text-black font-mono"
                 >
                     ['
                 </motion.span>
@@ -64,7 +69,11 @@ export const AnimatedLogo = () => {
                 <motion.div
                     layout
                     className="relative overflow-hidden h-8 flex items-center"
-                    transition={{ duration: 0.3, ease: "easeInOut" } as any}
+                    transition={{
+                        type: "spring",
+                        stiffness: 350,
+                        damping: 28
+                    } as any}
                 >
                     <AnimatePresence mode="popLayout">
                         <motion.span
@@ -73,8 +82,12 @@ export const AnimatedLogo = () => {
                             initial={{ y: 20, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             exit={{ y: -20, opacity: 0 }}
-                            transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] } as any}
-                            className="text-2xl font-bold tracking-tight text-[#0F172A] whitespace-nowrap block"
+                            transition={{
+                                type: "spring",
+                                stiffness: 300,
+                                damping: 25
+                            } as any}
+                            className="text-2xl font-extrabold tracking-tight font-inter text-black whitespace-nowrap block"
                         >
                             {words[currentWordIndex]}
                         </motion.span>
@@ -89,11 +102,16 @@ export const AnimatedLogo = () => {
                         opacity: showBrackets ? 1 : 0
                     }}
                     transition={{
-                        duration: 0.3,
-                        ease: "easeInOut",
-                        layout: { duration: 0.3, ease: "easeInOut" }
+                        type: "spring",
+                        stiffness: 350,
+                        damping: 28,
+                        layout: {
+                            type: "spring",
+                            stiffness: 350,
+                            damping: 28
+                        }
                     } as any}
-                    className="overflow-hidden whitespace-nowrap text-2xl font-bold text-[#0F172A] font-mono"
+                    className="overflow-hidden whitespace-nowrap text-2xl font-bold text-black font-mono"
                 >
                     ']
                 </motion.span>

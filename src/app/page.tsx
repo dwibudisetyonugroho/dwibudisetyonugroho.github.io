@@ -12,7 +12,7 @@ import { DataAnalyticsBackground } from '@/components/portfolio/DataAnalyticsBac
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen text-[#0F172A]">
+    <div className="relative min-h-screen text-black">
       <DataAnalyticsBackground />
       <Navigation />
       <HeroSection />

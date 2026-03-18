@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster as ShadcnToaster } from "@/components/ui/toaster";
+import { Toaster as SonnerToaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -9,7 +10,10 @@ const geistSans = Geist({
 });
 
 // Force rebuild for GitHub Pages cache bust
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -60,11 +64,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
+        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} antialiased bg-background text-foreground`}
         suppressHydrationWarning
       >
         {children}
-        <Toaster />
+        <ShadcnToaster />
+        <SonnerToaster position="bottom-right" richColors />
       </body>
     </html>
   );
