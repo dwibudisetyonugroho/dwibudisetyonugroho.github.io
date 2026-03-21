@@ -313,6 +313,62 @@ export const CERTIFICATES = [
                 'Descriptive Statistics'
             ]
         }
+    },
+    {
+        id: 'akprind-bachelor',
+        title: 'Bachelor of Engineering in Geological Engineering',
+        issuer: 'Institut Sains & Teknologi AKPRIND Yogyakarta',
+        gpa: '3.34 / 4.00',
+        certificateType: 'Bachelor’s Degree',
+        level: 'Very Satisfactory',
+        description: 'My engineering training provided a rigorous quantitative foundation, emphasizing spatial logic, complex system modeling, and statistical risk assessment. This background honed my ability to decompose ambiguous real-world problems into structured data models, directly translating geological field methodologies into modern data-driven decision-making frameworks.\n**Organizational Leadership**\n• **Human Resource Development Dept**: Designed seminar, workshop, and research to develop soft skills and hard skills for the members.\n• **Media & Publication Dept**: Managed and created graphic design and visual communication strategies for organizational social media.',
+        projectTitle: 'Thesis: Geospatial Predictive Modeling for Landslide Vulnerability',
+        projectDetails: [
+            'Landslide Susceptibility Zonation for Mlati Village and Surroundings, Arjosari District, Pacitan, East Java, Indonesia.',
+            '1. Executive Summary',
+            'This project involved a comprehensive geospatial analysis to identify and categorize landslide vulnerability zones across an 81 km² study area in Arjosari, Pacitan, East Java. By integrating field-collected primary data with regional secondary data, I developed a predictive risk model based on a modified weighted scoring system. The final output provided actionable insights for disaster mitigation and urban planning, classifying the region into High, Medium, and Low-risk zones.',
+            '2. Technical Stack',
+            '• Geospatial Analysis: ArcGIS 10.2 (Spatial Join, Weighted Overlay, Buffer Analysis).',
+            '• Structural Data Processing: Dips (Stereographic projection for rock stress analysis).',
+            '• Statistical Weighting: Microsoft Excel (Multi-criteria scoring and data normalization).',
+            '• Visualization: CorelDraw 2017 (Technical cartography and information design).',
+            '3. Data Methodology & Feature Engineering',
+            'The analysis was driven by 43 unique observation points where multiple environmental variables were recorded. I applied a Multi-Criteria Decision Making (MCDM) approach, assigning specific weights to eight parameters based on their influence on slope stability:',
+            'Anthropogenic Factors:',
+            '• Settlement Proximity (20% Weight): Evaluated as the most critical factor for risk impact.',
+            'Geophysical Parameters:',
+            '• Slope Gradient (15%): Ranging from flat (0-8%) to very steep (>20%).',
+            '• Soil Condition (15%): Analyzed residual soil thickness and fracture presence.',
+            '• Lithology/Rock Type (15%): Assessed the resistance of 4 distinct rock units (Tuff, Sandstone, Breccia, and Dacite).',
+            '• Precipitation (15%): Normalized annual rainfall data (~2,154 mm/year).',
+            'Environmental & Seismic Factors:',
+            '• Vegetation Cover (10%): Differentiated between deep-rooted trees (e.g., teak) and surface-level shrubs.',
+            '• Hydrology/Water Management (7%): Identified seepage points and groundwater influence.',
+            '• Seismicity (3%): Integrated historical earthquake frequency data from 2011–2020.',
+            '4. Key Analytical Insights',
+            'Using the Weighted Overlay method, each observation point was assigned a cumulative risk score ranging from 1.00 to 3.00.',
+            '• High-Risk Zones (38% of area): Scores between 2.40 – 3.00. These zones were characterized by steep slopes, high fracture density in the rock, and proximity to settlements. Point 33 recorded the highest risk score at 2.67.',
+            '• Medium-Risk Zones (47% of area): Scores between 1.70 – 2.39. This represents the dominant landscape, requiring active management like terracing to prevent degradation.',
+            '• Low-Risk Zones (15% of area): Scores between 1.00 – 1.69. Identified as the safest locations for future residential development.',
+            '5. Data-Driven Recommendations',
+            'The project concluded with strategic mitigation advice derived directly from the model\'s results:',
+            '• Urban Planning: Prohibit residential construction on slopes with a cumulative weight above 2.40.',
+            '• Engineering: Implement specific terracing and drainage systems in "Medium" risk zones to reduce soil saturation during the rainy season.',
+            '• Preventative Maintenance: Immediate sealing of ground fractures (identified in field data) to prevent water infiltration and subsequent mass movement.'
+        ],
+        skillsTitle: 'Relevant Coursework',
+        skillCategories: {
+            'Coursework': [
+                'Geostatistics',
+                'Geocomputation & GIS',
+                'Research Methodology',
+                'Mathematics I & II',
+                'Physics',
+                'Quality Management'
+            ]
+        },
+        thesisUrl: '/docs/Geological-Engineering-Thesis-Documentation.pdf',
+        artifactsUrl: 'https://drive.google.com/drive/folders/1VswUsTWFFfJ0RLlFgaA2LBITgBFC6CMT?usp=sharing'
     }
 ]
 
@@ -457,6 +513,33 @@ export const INTERNSHIPS = [
         platform: 'Kimia Farma',
         logo: '/logos/kimia-farma-logo.svg',
         logoAlt: 'Kimia Farma Logo'
+    },
+    {
+        id: 'private-driver',
+        title: 'Private Driver',
+        company: 'Private Client / Self-Employed',
+        certificateType: 'Professional Experience',
+        description: 'Managed end-to-end operational logistics for private clients, ensuring seamless execution of daily schedules across diverse geographic regions. Operated as the primary point of contact for time-sensitive travel requirements, leveraging real-time data analysis to optimize routes and mitigate delays.\n**Key Achievements & Responsibilities**\n• **Operational Efficiency**: Designed and executed dynamic route optimization strategies using real-time traffic data and predictive scheduling, ensuring 100% punctuality for critical business appointments.\n• **Crisis Management & Adaptability**: Successfully navigated complex logistical challenges (e.g., vehicle maintenance emergencies, sudden schedule pivots, and adverse weather conditions), maintaining operational continuity without disrupting client workflows.\n• **Asset Management**: Maintained strict adherence to safety protocols and vehicle performance metrics, conducting proactive preventative maintenance to ensure zero downtime and optimal vehicle reliability.',
+        skills: [
+            'Logistics Management',
+            'Route Optimization',
+            'Predictive Scheduling',
+            'Crisis Management',
+            'Asset Management',
+            'Operational Efficiency'
+        ],
+        skillCategories: {
+            'Operational Logistics': [
+                'Logistics Management',
+                'Route Optimization',
+                'Predictive Scheduling'
+            ],
+            'Management & Adaptability': [
+                'Crisis Management',
+                'Asset Management',
+                'Operational Efficiency'
+            ]
+        }
     }
 ]
 

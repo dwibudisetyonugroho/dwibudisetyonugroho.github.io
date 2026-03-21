@@ -121,7 +121,7 @@ export const ContactSection = () => {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
-                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-16"
+                    className="flex flex-wrap justify-center gap-6 mb-16 max-w-6xl mx-auto"
                 >
                     {contactMethods.map((method, index) => (
                         <motion.a
@@ -136,15 +136,15 @@ export const ContactSection = () => {
                                     handleCopy(e, method.copyValue, method.label);
                                 }
                             }}
-                            className={`group bg-white p-8 rounded-none shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col items-center text-center cursor-pointer ${method.hoverColor}`}
+                            className={`flex-initial min-w-[280px] bg-white p-6 px-10 rounded-none shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col items-center text-center cursor-pointer ${method.hoverColor}`}
                         >
-                            <div className={`p-4 rounded-none bg-secondary/10 mb-5 group-hover:scale-110 group-hover:bg-white/20 transition-all duration-300`}>
+                            <div className={`p-4 rounded-none bg-secondary/10 mb-4 group-hover:scale-110 group-hover:bg-white/20 transition-all duration-300`}>
                                 <method.icon className={`h-7 w-7 text-primary group-hover:text-white transition-colors duration-300`} />
                             </div>
-                            <h3 className="text-xs font-bold text-foreground/40 uppercase tracking-[0.2em] mb-3 group-hover:text-white/70 transition-colors duration-300">
+                            <h3 className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.2em] mb-3 group-hover:text-white/70 transition-colors duration-300">
                                 {method.label}
                             </h3>
-                            <p className="text-foreground font-semibold break-all group-hover:text-white transition-colors duration-300">
+                            <p className="text-foreground text-sm font-semibold whitespace-nowrap group-hover:text-white transition-colors duration-300">
                                 {method.value}
                             </p>
                         </motion.a>

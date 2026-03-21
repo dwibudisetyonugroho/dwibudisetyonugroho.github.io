@@ -68,7 +68,28 @@ export const InternshipsSection = () => {
 
                                     {/* Description */}
                                     <div className="mt-6 text-justify">
-                                        <p className="text-foreground/70 leading-relaxed text-[15px]">{internship.description}</p>
+                                        {internship.description.split('\n').map((line, i) => {
+                                            const isBullet = line.trim().startsWith('•');
+                                            const isBold = line.trim().startsWith('**') && line.trim().endsWith('**');
+
+                                            if (!line.trim()) return <div key={i} className="h-4" />;
+                                            if (isBullet) {
+                                                const bulletText = line.replace(/^•\s*/, '');
+                                                return (
+                                                    <div key={i} className="flex items-start gap-2 mb-1 text-left">
+                                                        <span className="text-foreground/70 mt-0.5 mt-[2px] text-[15px]">•</span>
+                                                        <p className="text-foreground/70 leading-relaxed text-[15px] flex-1">
+                                                            {bulletText.split('**').map((part, idx) => idx % 2 === 1 ? <strong key={idx} className="font-bold text-foreground">{part}</strong> : part)}
+                                                        </p>
+                                                    </div>
+                                                );
+                                            }
+                                            return (
+                                                <p key={i} className={`text-foreground/70 leading-relaxed text-[15px] mb-2 ${isBold ? 'font-bold mt-4 text-foreground' : ''}`}>
+                                                    {isBold ? line.trim().slice(2, -2) : line.split('**').map((part, idx) => idx % 2 === 1 ? <strong key={idx} className="font-bold text-foreground">{part}</strong> : part)}
+                                                </p>
+                                            );
+                                        })}
                                     </div>
 
                                     {/* Skills Section with Smart Show More */}
@@ -81,15 +102,17 @@ export const InternshipsSection = () => {
                                     {/* Bottom action bar - flush to card edges */}
                                     <div className="mt-8 -mx-8 -mb-8 pl-0 pr-8 flex items-center justify-between flex-wrap gap-4">
                                         <div className="flex items-center gap-0 flex-wrap">
-                                            <Button
-                                                className="px-6 py-2 h-10 rounded-none"
-                                                asChild
-                                            >
-                                                <a href={internship.verificationUrl || '#'} target="_blank" rel="noopener noreferrer">
-                                                    <ExternalLink className="h-4 w-4 mr-2" />
-                                                    View Certificate
-                                                </a>
-                                            </Button>
+                                            {internship.verificationUrl && (
+                                                <Button
+                                                    className="px-6 py-2 h-10 rounded-none"
+                                                    asChild
+                                                >
+                                                    <a href={internship.verificationUrl} target="_blank" rel="noopener noreferrer">
+                                                        <ExternalLink className="h-4 w-4 mr-2" />
+                                                        View Certificate
+                                                    </a>
+                                                </Button>
+                                            )}
 
                                             {(internship as any).projectLink && (
                                                 <Button

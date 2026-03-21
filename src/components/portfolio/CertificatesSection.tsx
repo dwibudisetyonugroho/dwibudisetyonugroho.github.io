@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { ExternalLink, Award, CheckCircle2, BookOpen, ChevronUp, ChevronDown, Copy, ArrowRight } from 'lucide-react'
+import { ExternalLink, Award, CheckCircle2, BookOpen, ChevronUp, ChevronDown, Copy, ArrowRight, FileText, Globe } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
@@ -85,8 +85,14 @@ export const CertificatesSection = () => {
 
                                         {/* Header Section with Badges */}
                                         <div className="pr-48">
-                                            <div className="flex items-start gap-3 mb-4">
+                                            <div className="flex flex-col items-start gap-1 mb-4">
                                                 <h3 className="text-2xl font-bold text-foreground tracking-tight">{cert.title}</h3>
+                                                {cert.issuer && (
+                                                    <h4 className="text-lg font-medium text-foreground/80">{cert.issuer}</h4>
+                                                )}
+                                                {(cert as any).gpa && (
+                                                    <p className="text-md font-medium text-foreground/70">GPA: {(cert as any).gpa}</p>
+                                                )}
                                             </div>
 
 
@@ -94,11 +100,34 @@ export const CertificatesSection = () => {
 
                                         {/* Description */}
                                         <div className="mt-6 text-justify">
-                                            <p className="text-foreground/70 leading-relaxed text-[15px]">{cert.description}</p>
+                                            {cert.description.split('\n').map((line, i) => {
+                                                const isBullet = line.trim().startsWith('•');
+                                                const isBold = line.trim().startsWith('**') && line.trim().endsWith('**');
+
+                                                // Don't render empty lines (from double newlines), just add mb-4 to the previous paragraph,
+                                                // or just render an empty paragraph with some height
+                                                if (!line.trim()) return <div key={i} className="h-4" />;
+                                                if (isBullet) {
+                                                    const bulletText = line.replace(/^•\s*/, '');
+                                                    return (
+                                                        <div key={i} className="flex items-start gap-2 mb-1 text-left">
+                                                            <span className="text-foreground/70 mt-0.5 mt-[2px] text-[15px]">•</span>
+                                                            <p className="text-foreground/70 leading-relaxed text-[15px] flex-1">
+                                                                {bulletText.split('**').map((part, idx) => idx % 2 === 1 ? <strong key={idx} className="font-bold text-foreground">{part}</strong> : part)}
+                                                            </p>
+                                                        </div>
+                                                    );
+                                                }
+                                                return (
+                                                    <p key={i} className={`text-foreground/70 leading-relaxed text-[15px] mb-2 ${isBold ? 'font-bold mt-4 text-foreground' : ''}`}>
+                                                        {isBold ? line.trim().slice(2, -2) : line.split('**').map((part, idx) => idx % 2 === 1 ? <strong key={idx} className="font-bold text-foreground">{part}</strong> : part)}
+                                                    </p>
+                                                );
+                                            })}
                                         </div>
 
-                                        {/* Course Curriculum Accordion */}
-                                        {cert.courses && (
+                                        {/* Course / Project Accordion */}
+                                        {(cert.courses || (cert as any).projectDetails) && (
                                             <div className="mt-6 border border-[#E2E8F0] overflow-hidden">
                                                 <button
                                                     onClick={() => toggleCurriculum(index)}
@@ -106,8 +135,8 @@ export const CertificatesSection = () => {
                                                 >
                                                     <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
                                                         <BookOpen className="h-4 w-4 text-secondary" />
-                                                        Course Curriculum
-                                                        <span className="text-xs font-normal text-foreground/50 ml-1">({cert.courses.length} Courses)</span>
+                                                        {(cert as any).projectTitle || 'Course Curriculum'}
+                                                        {cert.courses && <span className="text-xs font-normal text-foreground/50 ml-1">({cert.courses.length} Courses)</span>}
                                                     </div>
                                                     {showCurriculum[index] ? (
                                                         <ChevronUp className="h-4 w-4 text-foreground/50" />
@@ -125,16 +154,35 @@ export const CertificatesSection = () => {
                                                             className="overflow-hidden"
                                                         >
                                                             <div className="px-4 py-3 bg-white border-t border-[#E2E8F0]">
-                                                                <ul className="columns-1 sm:columns-2 gap-x-8 space-y-2">
-                                                                    {cert.courses.map((course, idx) => (
-                                                                        <li key={idx} className="flex items-start gap-2 text-sm text-foreground/70 break-inside-avoid">
-                                                                            <span className="text-secondary mt-1 text-[10px] font-semibold min-w-[16px]">
-                                                                                {idx + 1}.
-                                                                            </span>
-                                                                            <span>{course}</span>
-                                                                        </li>
-                                                                    ))}
-                                                                </ul>
+                                                                {cert.courses ? (
+                                                                    <ul className="columns-1 sm:columns-2 gap-x-8 space-y-2">
+                                                                        {cert.courses.map((course, idx) => (
+                                                                            <li key={idx} className="flex items-start gap-2 text-sm text-foreground/70 break-inside-avoid">
+                                                                                <span className="text-secondary mt-1 text-[10px] font-semibold min-w-[16px]">
+                                                                                    {idx + 1}.
+                                                                                </span>
+                                                                                <span>{course}</span>
+                                                                            </li>
+                                                                        ))}
+                                                                    </ul>
+                                                                ) : (
+                                                                    <div className="space-y-2 px-2 py-1">
+                                                                        {(cert as any).projectDetails.map((detail: string, idx: number) => {
+                                                                            const isHeading = /^\d+\./.test(detail);
+                                                                            const isSubHeading = detail.endsWith(':') && detail.length < 50;
+                                                                            const isMainTitle = idx === 0;
+                                                                            const isListItem = detail.trim().startsWith('•');
+                                                                            
+                                                                            return (
+                                                                                <div key={idx} className={`${isListItem ? 'ml-4' : ''}`}>
+                                                                                    <p className={`text-sm text-foreground/80 text-justify ${isMainTitle ? 'font-bold text-foreground mb-4' : isHeading ? 'font-bold mt-5 mb-1 text-foreground' : isSubHeading ? 'font-semibold mt-3' : 'leading-relaxed'}`}>
+                                                                                        {detail}
+                                                                                    </p>
+                                                                                </div>
+                                                                            );
+                                                                        })}
+                                                                    </div>
+                                                                )}
                                                             </div>
                                                         </motion.div>
                                                     )}
@@ -145,7 +193,7 @@ export const CertificatesSection = () => {
 
                                         {/* Simplified Skills Section - Smart Show More */}
                                         {cert.skillCategories && (
-                                            <SkillsList skills={Object.values(cert.skillCategories).flat()} title="Technical Skill" />
+                                            <SkillsList skills={Object.values(cert.skillCategories).flat()} title={(cert as any).skillsTitle || "Technical Skill"} />
                                         )}
 
                                         {/* Bottom action bar - flush to card edges */}
@@ -177,18 +225,18 @@ export const CertificatesSection = () => {
                                                             </a>
                                                         </Button>
                                                     </>
-                                                ) : (
+                                                ) : cert.verificationUrl ? (
                                                     /* Single Button: For other certificates */
                                                     <Button
                                                         className="px-6 py-2 h-10 rounded-none"
                                                         asChild
                                                     >
-                                                        <a href={cert.verificationUrl || '#'} target="_blank" rel="noopener noreferrer">
+                                                        <a href={cert.verificationUrl} target="_blank" rel="noopener noreferrer">
                                                             <ExternalLink className="h-4 w-4 mr-2" />
                                                             View Certificate
                                                         </a>
                                                     </Button>
-                                                )}
+                                                ) : null}
 
                                                 {cert.credentialId && (
                                                     <div className="flex items-center gap-2 bg-secondary/5 px-3 py-1.5 border border-border/30 ml-1.5">
@@ -206,6 +254,31 @@ export const CertificatesSection = () => {
                                                             )}
                                                         </button>
                                                     </div>
+                                                )}
+
+                                                {(cert as any).thesisUrl && (
+                                                    <Button
+                                                        className="px-6 py-2 h-10 rounded-none font-bold"
+                                                        asChild
+                                                    >
+                                                        <a href={(cert as any).thesisUrl} target="_blank" rel="noopener noreferrer">
+                                                            <FileText className="h-4 w-4 mr-2" />
+                                                            View Thesis Documentation
+                                                        </a>
+                                                    </Button>
+                                                )}
+
+                                                {(cert as any).artifactsUrl && (
+                                                    <Button
+                                                        variant="default"
+                                                        className="px-6 py-2 h-10 rounded-none border-0 bg-[#023047] text-white hover:bg-[#023047]/90 font-bold"
+                                                        asChild
+                                                    >
+                                                        <a href={(cert as any).artifactsUrl} target="_blank" rel="noopener noreferrer">
+                                                            <Globe className="h-4 w-4 mr-2" />
+                                                            View Thesis Artifacts
+                                                        </a>
+                                                    </Button>
                                                 )}
                                             </div>
 

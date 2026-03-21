@@ -74,18 +74,14 @@ export const SkillsSection = () => {
                                     <button
                                         key={i}
                                         onClick={() => goToPage(skillPage)}
-                                        className={`group transition-all duration-300 ${
+                                        className={`px-3 py-1.5 text-xs font-bold border transition-all duration-300 item-hover block ${
                                             isActive 
-                                                ? 'text-secondary scale-105' 
-                                                : 'text-slate-500 hover:text-black opacity-60 hover:opacity-100'
+                                                ? 'bg-[#023047] text-white border-[#023047] scale-105 shadow-md z-10' 
+                                                : 'bg-slate-50 text-black/70 border-slate-200 opacity-60 hover:opacity-100 hover:bg-slate-100 hover:text-black hover:border-slate-300'
                                         }`}
                                         aria-label={`Go to ${skill.name}`}
                                     >
-                                        <span className={`text-[11px] font-extrabold uppercase tracking-widest whitespace-nowrap ${
-                                            isActive ? 'opacity-100' : 'opacity-80'
-                                        }`}>
-                                            {skill.name}
-                                        </span>
+                                        {skill.name}
                                     </button>
                                 )
                             })}

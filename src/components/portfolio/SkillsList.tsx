@@ -18,8 +18,9 @@ export const SkillsList = ({ skills, title = "Skills & Technologies" }: SkillsLi
     useEffect(() => {
         const checkOverflow = () => {
             if (containerRef.current) {
-                // Check if content height exceeds one line (32px)
-                const hasOverflow = containerRef.current.scrollHeight > 32
+                // Check if content height exceeds one line.
+                // Using 50px as an extremely safe threshold for a single line of pills.
+                const hasOverflow = containerRef.current.scrollHeight > 50
                 setShowButton(hasOverflow)
             }
         }
@@ -49,7 +50,7 @@ export const SkillsList = ({ skills, title = "Skills & Technologies" }: SkillsLi
             <motion.div
                 ref={containerRef}
                 initial={false}
-                animate={{ height: isExpanded || !showButton ? "auto" : 32 }}
+                animate={{ height: isExpanded || !showButton ? "auto" : 38 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
                 className="overflow-hidden"
             >

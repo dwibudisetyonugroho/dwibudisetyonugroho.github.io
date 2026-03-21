@@ -13,12 +13,12 @@ export const HeroSection = () => (
                 </h1>
 
                 <div className="space-y-6 mb-10">
-                    <p className="text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto leading-relaxed">
-                        I&apos;m <span className="font-bold text-foreground border-b-2 border-primary/20">Dwi Budi Setyonugroho</span>, a Data Analyst specializing in architecting <span className="font-semibold text-foreground">end-to-end analytics pipelines</span> that bridge the gap between complex datasets and strategic business growth. With a foundation in <span className="font-semibold text-foreground">Engineering background</span> and <span className="font-semibold text-foreground">IBM, Google, and Microsoft Professional Certificates from Coursera</span>, I leverage a sophisticated stack of <span className="font-semibold text-foreground">SQL, Python, and Power BI/Looker Studio</span> to deliver high-impact intelligence.
+                    <p className="text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto leading-relaxed text-center">
+                        I am a Data Analyst who specializes in architecting <span className="font-semibold text-foreground">end-to-end analytics workflows</span> that transform complex datasets into strategic business assets. My unique value proposition lies at the intersection of a <span className="font-semibold text-foreground">Bachelor in Engineering</span> and three industry-recognized <span className="font-semibold text-foreground">Professional Certificates (IBM, Microsoft, Google) via Coursera</span>. This dual foundation allows me to approach data not just as numbers, but as a system requiring rigorous modeling, spatial logic, and risk assessment.
                     </p>
 
-                    <p className="text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto leading-relaxed">
-                        From optimizing <span className="font-bold text-foreground">risk detection by 58%</span> to uncovering multi-million IDR revenue opportunities through <span className="font-semibold text-foreground">tiered margin logic</span> and geographic analysis, I transform raw data into actionable assets. My approach combines rigorous statistical modeling with strategic business acumen to resolve operational bottlenecks and drive data-informed decision-making.
+                    <p className="text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto leading-relaxed text-center">
+                        My technical toolkit—spanning <span className="font-semibold text-foreground">Excel, SQL, Python, Looker Studio, Power BI, and Tableau</span>—is deployed to solve real-world operational bottlenecks. I don&apos;t just build dashboards; I engineer pipelines that drive growth and mitigate risk.
                     </p>
                 </div>
 
