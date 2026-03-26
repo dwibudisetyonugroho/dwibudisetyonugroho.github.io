@@ -84,7 +84,7 @@ export const Navigation = () => {
                 onMouseLeave={handleMouseLeaveNav}
             >
                 {/* Main nav row */}
-                <div className="pointer-events-auto w-full bg-white backdrop-blur-[2px] border border-gray-200 rounded-2xl shadow-lg shadow-black/10 overflow-hidden h-14 flex items-center px-5 gap-4 transition-all duration-300">
+                <div className="pointer-events-auto w-full bg-white backdrop-blur-[2px] border border-gray-200 rounded-2xl shadow-lg shadow-black/10 h-14 flex items-center px-5 gap-4 transition-all duration-300">
 
                     {/* Logo - width locked to prevent layout shift */}
                     <div className="flex items-center flex-shrink-0 w-[120px]">
@@ -98,7 +98,7 @@ export const Navigation = () => {
                                 key={item.name}
                                 href={item.href}
                                 text={item.name}
-                                className="text-lg font-medium text-black whitespace-nowrap px-3"
+                                className="text-lg font-medium whitespace-nowrap px-3"
                                 isActive={activeSection === item.href.substring(1)}
                                 onHoverChange={(hovered) => {
                                     if (hovered) {
@@ -132,8 +132,19 @@ export const Navigation = () => {
                                     alt="IBM Data Analyst Professional Certificate Badge"
                                     className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-110"
                                 />
-                                <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-black text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                                    IBM Data Analyst
+                                {/* Full-size hover card */}
+                                <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[180px] p-6 bg-white/95 backdrop-blur-md border border-gray-100 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] opacity-0 group-hover:opacity-100 group-hover:translate-y-2 transition-all duration-300 pointer-events-none flex flex-col items-center gap-4 z-50">
+                                    <div className="relative h-28 w-28 flex-shrink-0">
+                                        <img 
+                                            src="/logos/ibm-data-analyst-badge.png" 
+                                            alt="IBM Data Analyst Full Badge"
+                                            className="h-full w-full object-contain drop-shadow-lg"
+                                        />
+                                    </div>
+                                    <div className="text-center">
+                                        <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Professional Certificate</div>
+                                        <div className="text-xs font-bold text-black leading-tight">IBM Data Analyst</div>
+                                    </div>
                                 </div>
                             </a>
 
@@ -149,8 +160,19 @@ export const Navigation = () => {
                                     alt="Microsoft Power BI Data Analyst Professional Certificate Badge"
                                     className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-110"
                                 />
-                                <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-black text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                                    Microsoft Power BI Analyst
+                                {/* Full-size hover card */}
+                                <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[180px] p-6 bg-white/95 backdrop-blur-md border border-gray-100 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] opacity-0 group-hover:opacity-100 group-hover:translate-y-2 transition-all duration-300 pointer-events-none flex flex-col items-center gap-4 z-50">
+                                    <div className="relative h-28 w-28 flex-shrink-0">
+                                        <img 
+                                            src="/logos/microsoft-power-bi-badge.png" 
+                                            alt="Microsoft Power BI Full Badge"
+                                            className="h-full w-full object-contain drop-shadow-lg"
+                                        />
+                                    </div>
+                                    <div className="text-center">
+                                        <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Professional Certificate</div>
+                                        <div className="text-xs font-bold text-black leading-tight">Microsoft Power BI Data Analyst</div>
+                                    </div>
                                 </div>
                             </a>
 
@@ -166,8 +188,19 @@ export const Navigation = () => {
                                     alt="Google Advanced Data Analytics Professional Certificate Badge"
                                     className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-110"
                                 />
-                                <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-black text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                                    Google Advanced Data Analytics
+                                {/* Full-size hover card */}
+                                <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[180px] p-6 bg-white/95 backdrop-blur-md border border-gray-100 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] opacity-0 group-hover:opacity-100 group-hover:translate-y-2 transition-all duration-300 pointer-events-none flex flex-col items-center gap-4 z-50">
+                                    <div className="relative h-28 w-28 flex-shrink-0">
+                                        <img 
+                                            src="/logos/google-advanced-data-analytics-badge.png" 
+                                            alt="Google Advanced Data Analytics Full Badge"
+                                            className="h-full w-full object-contain drop-shadow-lg"
+                                        />
+                                    </div>
+                                    <div className="text-center">
+                                        <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Professional Certificate</div>
+                                        <div className="text-xs font-bold text-black leading-tight">Google Advanced Data Analytics</div>
+                                    </div>
                                 </div>
                             </a>
                         </div>
@@ -201,7 +234,7 @@ export const Navigation = () => {
                                     animate={{ rotate: isConnectOpen ? 180 : 0 }}
                                     transition={springTransition}
                                 >
-                                    <ChevronDown className="h-3 w-3" />
+                                    <ChevronDown className="h-4 w-4" />
                                 </motion.div>
                             </Button>
                         </div>
@@ -335,7 +368,7 @@ export const Navigation = () => {
                                 <div key={item.name}>
                                     <a
                                         href={item.href}
-                                        className={`block px-4 py-3 text-xl font-medium font-inter w-full text-black rounded-xl transition-colors ${activeSection === item.href.substring(1) ? 'bg-gray-100' : 'hover:bg-gray-50'}`}
+                                        className={`block px-4 py-3 text-xl font-medium font-inter w-full rounded-xl transition-colors ${activeSection === item.href.substring(1) ? 'bg-gray-100 text-[#FF5B00]' : 'hover:bg-gray-50 text-black hover:text-[#FF5B00]'}`}
                                         onClick={() => setIsMenuOpen(false)}
                                     >
                                         {item.name}

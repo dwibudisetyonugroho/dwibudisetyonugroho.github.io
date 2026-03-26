@@ -49,18 +49,19 @@ export const Footer = () => {
                         </motion.div>
                         
                         <motion.p variants={itemVariants} className="text-white/50 text-base leading-relaxed mb-8 max-w-md">
-                            Entry-level Data Analyst passionate about transforming complex data into actionable insights that drive business growth and innovation.
+                            A Data Analyst with a passion for finding the stories within data to help businesses solve problems and reach their goals more effectively.
                         </motion.p>
 
                         <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-4 mb-8">
                             {/* Career Status Badge */}
-                            <div className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full">
-                                <span className="relative flex h-2 w-2">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                                </span>
-                                <span className="text-[11px] font-bold text-emerald-400 uppercase tracking-wider">Open to Opportunities</span>
-                            </div>
+                            <a 
+                                href="/resume.pdf"
+                                target="_blank"
+                                className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black font-bold text-sm rounded-xl hover:bg-secondary hover:text-white transition-all duration-300 group shadow-lg shadow-white/5"
+                            >
+                                <FileText className="h-4 w-4" />
+                                Download Resume
+                            </a>
 
                             <div className="flex items-center gap-3">
                                 {[
@@ -82,16 +83,7 @@ export const Footer = () => {
                             </div>
                         </motion.div>
 
-                        <motion.div variants={itemVariants}>
-                            <a 
-                                href="/resume.pdf" // Update with absolute path if needed
-                                target="_blank"
-                                className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black font-bold text-sm rounded-xl hover:bg-secondary hover:text-white transition-all duration-300 group shadow-lg shadow-white/5"
-                            >
-                                <FileText className="h-4 w-4" />
-                                Download Resume
-                            </a>
-                        </motion.div>
+
                     </div>
 
                     {/* Quick Links */}
@@ -107,9 +99,8 @@ export const Footer = () => {
                                 <motion.li key={link.name} variants={itemVariants}>
                                     <a 
                                         href={link.href} 
-                                        className="text-white/40 text-sm hover:text-secondary transition-all duration-300 flex items-center gap-3 group"
+                                        className="text-white/40 text-sm hover:text-secondary"
                                     >
-                                        <div className="h-px w-0 bg-secondary group-hover:w-4 transition-all duration-300" />
                                         {link.name}
                                     </a>
                                 </motion.li>
@@ -124,23 +115,20 @@ export const Footer = () => {
                             <motion.li variants={itemVariants} className="group">
                                 <a 
                                     href={`mailto:${CONTACT_INFO.email}`} 
-                                    className="flex flex-col gap-1"
+                                    className="group"
                                 >
-                                    <span className="text-[10px] text-white/20 uppercase tracking-widest font-bold">Email Me</span>
-                                    <span className="text-white/60 text-sm group-hover:text-secondary transition-colors truncate">{CONTACT_INFO.email}</span>
+                                    <span className="text-white/60 text-sm group-hover:text-secondary truncate">{CONTACT_INFO.email}</span>
                                 </a>
                             </motion.li>
                             <motion.li variants={itemVariants} className="group">
                                 <a 
                                     href={`tel:${CONTACT_INFO.phone.replace(/\s/g, '')}`} 
-                                    className="flex flex-col gap-1"
+                                    className="group"
                                 >
-                                    <span className="text-[10px] text-white/20 uppercase tracking-widest font-bold">Call Me</span>
-                                    <span className="text-white/60 text-sm group-hover:text-secondary transition-colors">{CONTACT_INFO.phone}</span>
+                                    <span className="text-white/60 text-sm group-hover:text-secondary">{CONTACT_INFO.phone}</span>
                                 </a>
                             </motion.li>
-                            <motion.li variants={itemVariants} className="flex flex-col gap-1">
-                                <span className="text-[10px] text-white/20 uppercase tracking-widest font-bold">Location</span>
+                            <motion.li variants={itemVariants}>
                                 <span className="text-white/60 text-sm flex items-center gap-2">
                                     <Globe className="h-3 w-3" />
                                     {CONTACT_INFO.location}
@@ -157,8 +145,8 @@ export const Footer = () => {
                     viewport={{ once: true }}
                     className="pt-10 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-8"
                 >
-                    <p className="text-white/20 text-[11px] tracking-widest uppercase font-medium">
-                        © {currentYear} Dwi Budi Setyonugroho
+                    <p className="text-white/40 text-[10px] uppercase tracking-widest font-medium">
+                        © {new Date().getFullYear()} Dwi Budi Setyonugroho. All rights reserved.
                     </p>
                     
                     <button
