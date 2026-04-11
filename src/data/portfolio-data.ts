@@ -3,19 +3,86 @@ import { Mail, Phone, MapPin } from 'lucide-react'
 export const NAVIGATION_ITEMS = [
     { name: 'About', href: '#about' },
     { name: 'Skill', href: '#skills' },
+    { name: 'Certification', href: '#certifications' },
     { name: 'Education', href: '#certificates' },
     { name: 'Project', href: '#projects' },
     { name: 'Experience', href: '#internships' },
     { name: 'Contact', href: '#contact' }
 ]
 
+export const ABOUT_DATA = {
+    name: "Dwi Budi Setyonugroho",
+    summary: "A Data Analyst with a passion for finding the stories within data to help businesses solve problems and reach their goals more effectively.",
+    bio: [
+        "Hi, I'm **Dwi Budi Setyonugroho**. My journey began with an **Engineering degree**, where my thesis on risk assessment taught me early on how to approach data analysis. As my interest in the data science field grew, I pursued the **IBM Data Analyst Professional Certificate** to master the fundamentals of analytics, followed by the **Microsoft Power BI Data Analyst Professional Certificate** to deepen my expertise in data visualization. Finally, I completed the **Google Advanced Data Analytics Professional Certificate**, where I dove deeper into statistics and machine learning to build predictive models.",
+        "Subsequently, I joined **virtual internships** with three companies, applying those skills to solve complex challenges in credit risk modeling and revenue optimization. Currently, I work as a **private driver**, which has further honed my communication, crisis management, time management, and adaptability soft skills. I would be honored to bring my blend of knowledge to your team."
+    ]
+}
+
+export const CERTIFICATIONS = [
+    {
+        id: 'datacamp-sql-associate',
+        title: 'SQL Associate Certification',
+        issuer: 'DataCamp',
+        date: '10 April 2026',
+        certificateType: 'DataCamp Certification',
+        description: 'Validated proficiency in essential SQL skills for data analysis, including data manipulation, joining tables, and summarizing datasets. This certification involves a rigorous timed exam and practical application of SQL queries to real-world business scenarios.',
+        credentialId: 'SQA0014758676777',
+        verificationUrl: 'https://www.datacamp.com/certificate/SQA0014758676777',
+        platform: 'DataCamp',
+        skillCategories: {
+            'SQL Analysis': [
+                'Data Manipulation',
+                'Joining Tables',
+                'Summarizing Datasets',
+                'SQL Queries'
+            ]
+        }
+    }
+]
+
 export const CERTIFICATES = [
+    {
+        id: 'datacamp-sql-fundamentals',
+        title: 'SQL Fundamentals',
+        issuer: 'DataCamp',
+        courseCount: '7',
+        certificateType: 'DataCamp Education',
+        level: 'Intermediate',
+        description: 'In this learning journey, I explored intermediate and advanced SQL concepts, primarily using PostgreSQL. I learned how to logically design databases using normalization and dimensional modeling. I mastered complex querying techniques, including advanced joins, set operations, and various subqueries like CTEs. I also gained skills in data manipulation using CASE statements, date/string functions, and arrays. Finally, I learned to write powerful window functions for analytics and manage database views and roles.',
+        skills: [
+            'PostgreSQL',
+            'Database Design',
+            'Normalization',
+            'Dimensional Modeling',
+            'Advanced SQL Joins',
+            'Subqueries (CTEs)',
+            'Window Functions',
+            'Data Manipulation',
+            'Database Views & Roles',
+            'Relational Databases',
+            'SQL Optimization'
+        ],
+        courses: [
+            'Introduction to SQL',
+            'Intermediate SQL',
+            'Joining Data in SQL',
+            'Data Manipulation in SQL',
+            'PostgreSQL Summary Stats and Window Functions',
+            'Functions for Manipulating Data in PostgreSQL',
+            'Database Design'
+        ],
+        credentialId: 'SQF001',
+        certificateUrl: '/certificates/DataCamp-SQL-Fundamentals.pdf',
+        verificationUrl: 'https://www.datacamp.com/completed/statement-of-accomplishment/track/60ec5aa270f327e262b276e40d11ca0f341203db?utm_medium=organic_social&utm_campaign=sharewidget&utm_content=soa&utm_source=copylink',
+        platform: 'DataCamp'
+    },
     {
         id: 'google-advanced-data-analytics',
         title: 'Google Advanced Data Analytics Professional Certificate',
         issuer: 'Google',
         courseCount: '7',
-        certificateType: 'Professional Certificate',
+        certificateType: 'Coursera Education',
         level: 'Advanced',
         description: 'This program included over 200 hours of instruction and hundreds of practice-based assessments, which helped me simulate real-world advanced data analytics scenarios that are critical for success in the workplace. The content was highly interactive and exclusively developed by Google employees with decades of experience in advanced data analytics and data science. Through a mix of videos, assessments, and hands-on labs, I was introduced to advanced data analytics tools and platforms and key technical skills required for an advanced role.',
         skills: [
@@ -95,7 +162,7 @@ export const CERTIFICATES = [
         title: 'Microsoft Power BI Data Analyst Professional Certificate',
         issuer: 'Microsoft',
         courseCount: '8',
-        certificateType: 'Professional Certificate',
+        certificateType: 'Coursera Education',
         level: 'Professional',
         description: 'This program was uniquely mapped to key job skills required in a Power BI data analyst role. In each course, I consolidated what I learned by completing a project that simulated a real-world data analysis scenario using Power BI. I also completed a final capstone project where I showcased all my new Power BI data analytical skills by connecting to data sources to transform data into an optimized data model and demonstrating data storytelling through dashboards, reports and charts to solve business challenges and identify new opportunities.',
         skills: [
@@ -175,12 +242,12 @@ export const CERTIFICATES = [
         id: 'ibm-data-analyst',
         title: 'IBM Data Analyst Professional Certificate',
         issuer: 'IBM',
-        date: 'November 5, 2024',
-        startDate: 'October 2025',
-        endDate: 'November 2025',
+        date: 'November 5, 2023',
+        startDate: 'September 2023',
+        endDate: 'October 2023',
         completionTime: '2 Months',
         courseCount: '11',
-        certificateType: 'Professional Certificate',
+        certificateType: 'Coursera Education',
         level: 'Professional',
         description: 'I gained hands-on expertise in the full data analysis lifecycle, from wrangling datasets with SQL and Python to visualizing insights in Excel and Cognos. My projects included analyzing vehicle inventory with pivot tables, creating interactive KPI dashboards, and extracting financial data with Pandas. I also built regression models to predict housing prices and developed a dynamic Python dashboard for flight reliability, effectively bridging technical rigor with data storytelling.',
         skills: [
@@ -267,7 +334,7 @@ export const CERTIFICATES = [
         endDate: 'September 2025',
         completionTime: '1 Month',
         courseCount: '5',
-        certificateType: 'Professional Certificate',
+        certificateType: 'MySkill Education',
         level: 'Professional',
         description: 'Completed a Full Learning Path with Professional Skill during 59 hours in Microsoft Excel. This comprehensive program covers Excel from basic to advanced levels, including data manipulation, forecasting, regression, and statistical analysis. Gained hands-on experience with data cleansing, visualization, pivot tables, Power Pivot, VBA macros, and advanced analytical techniques.',
         courses: [
@@ -319,7 +386,7 @@ export const CERTIFICATES = [
         title: 'Bachelor of Engineering in Geological Engineering',
         issuer: 'Institut Sains & Teknologi AKPRIND Yogyakarta',
         gpa: '3.34 / 4.00',
-        certificateType: 'Bachelor’s Degree',
+        certificateType: 'Bachelor’s Education',
         level: 'Very Satisfactory',
         description: 'My engineering training provided a rigorous quantitative foundation, emphasizing spatial logic, complex system modeling, and statistical risk assessment. This background honed my ability to decompose ambiguous real-world problems into structured data models, directly translating geological field methodologies into modern data-driven decision-making frameworks.\n**Organizational Leadership**\n• **Human Resource Development Dept**: Designed seminar, workshop, and research to develop soft skills and hard skills for the members.\n• **Media & Publication Dept**: Managed and created graphic design and visual communication strategies for organizational social media.',
         projectTitle: 'Thesis: Geospatial Predictive Modeling for Landslide Vulnerability',
@@ -377,9 +444,9 @@ export const INTERNSHIPS = [
         id: 'idx-partners-intern',
         title: 'Data Scientist Project-Based Internship',
         company: 'ID/X Partners',
-        period: 'November 2025 - December 2025',
-        startDate: 'November 2025',
-        endDate: 'December 2025',
+        period: 'November 2023 - December 2023',
+        startDate: 'November 2023',
+        endDate: 'December 2023',
         completionTime: '1 Month',
         certificateType: 'Project-Based Virtual Internship',
         level: 'Excellent',
@@ -427,6 +494,7 @@ export const INTERNSHIPS = [
         id: 'bank-muamalat-intern',
         title: 'Business Intelligence Analyst Project-Based Internship',
         company: 'Bank Muamalat',
+        period: 'August 2023 - September 2023',
         certificateType: 'Project-Based Virtual Internship',
         level: 'Qualified',
         description: 'This project-based internship provides Business Intelligence training focusing on technology stacks like SQL (PostgreSQL and BigQuery), Microsoft Excel, and Looker Studio. It cultivates specific skills in database management, advanced data manipulation (such as CTEs and joins), and data storytelling through interactive dashboards for banking portfolio analysis.',
@@ -471,9 +539,9 @@ export const INTERNSHIPS = [
         id: 'kimia-farma-intern',
         title: 'Big Data Analytics Project-Based Internship',
         company: 'Kimia Farma',
-        period: 'October 2025 - November 2025',
-        startDate: 'October 2025',
-        endDate: 'November 2025',
+        period: 'October 2023 - November 2023',
+        startDate: 'October 2023',
+        endDate: 'November 2023',
         completionTime: '1 Month',
         certificateType: 'Project-Based Virtual Internship',
         level: 'Excellent',
@@ -727,229 +795,27 @@ export const PROJECTS = [
 
 ]
 
-// --- Skill Categorization & Aggregation Logic ---
 
-const SKILL_CATEGORY_MAP: Record<string, string> = {
-    // Programming & Databases
-    'Python': 'Programming & Databases',
-    'SQL': 'Programming & Databases',
-    'Standard SQL': 'Programming & Databases',
-    'PostgreSQL': 'Programming & Databases',
-    'Google BigQuery': 'Programming & Databases',
-    'BigQuery': 'Programming & Databases',
-    'MySQL': 'Programming & Databases',
-    'Jupyter Notebooks': 'Programming & Databases',
-    'Python Programming': 'Programming & Databases',
-    'Python (Pandas, NumPy, Scikit-Learn)': 'Programming & Databases',
-    'Python (Pandas, Scikit-Learn)': 'Programming & Databases',
-    'Web Scraping': 'Programming & Databases',
-
-    // Data Visualization & BI
-    'Data Visualization': 'Data Visualization & BI',
-    'Power BI': 'Data Visualization & BI',
-    'Power BI (DAX)': 'Data Visualization & BI',
-    'Power BI (DAX, Power Query)': 'Data Visualization & BI',
-    'Tableau': 'Data Visualization & BI',
-    'Tableau Software': 'Data Visualization & BI',
-    'Looker Studio': 'Data Visualization & BI',
-    'Google Looker Studio': 'Data Visualization & BI',
-    'IBM Cognos Analytics': 'Data Visualization & BI',
-    'Matplotlib': 'Data Visualization & BI',
-    'Seaborn': 'Data Visualization & BI',
-    'Plotly': 'Data Visualization & BI',
-    'Dashboard': 'Data Visualization & BI',
-    'KPI Dashboard Design': 'Data Visualization & BI',
-    'Data Presentation': 'Data Visualization & BI',
-    'Data Storytelling': 'Data Visualization & BI',
-    'Interactive Data Visualization': 'Data Visualization & BI',
-
-    // Data Engineering
-    'Data Engineering': 'Data Engineering',
-    'ETL': 'Data Engineering',
-    'ELT': 'Data Engineering',
-    'ETL Pipeline': 'Data Engineering',
-    'ELT Architecture': 'Data Engineering',
-    'ETL & ELT Pipelines': 'Data Engineering',
-    'Data Warehousing': 'Data Engineering',
-    'Database Design': 'Data Engineering',
-    'Dimensional Modeling': 'Data Engineering',
-    'Star Schema Modeling': 'Data Engineering',
-    'Star Schema': 'Data Engineering',
-    'Data Modeling': 'Data Engineering',
-    'Git': 'Data Engineering',
-    'GitHub': 'Data Engineering',
-    'Git/GitHub': 'Data Engineering',
-    'Git/GitHub (Version Control)': 'Data Engineering',
-    'Google Cloud Platform': 'Data Engineering',
-    'GCP': 'Data Engineering',
-    'Microsoft Excel': 'Data Engineering',
-    'Excel': 'Data Engineering',
-    'Excel Formulas': 'Data Engineering',
-    'Advanced Excel': 'Data Engineering',
-    'Power Pivot': 'Data Engineering',
-    'Macro VBA': 'Data Engineering',
-    'VBA': 'Data Engineering',
-    'Data Manipulation': 'Data Engineering',
-    'Data Wrangling': 'Data Engineering',
-    'Data Cleansing': 'Data Engineering',
-
-    // Data Science & Analytics
-    'Data Science': 'Data Science & Analytics',
-    'Machine Learning': 'Data Science & Analytics',
-    'ML modeling': 'Data Science & Analytics',
-    'Predictive Modeling': 'Data Science & Analytics',
-    'Statistics': 'Data Science & Analytics',
-    'Statistical Analysis': 'Data Science & Analytics',
-    'Regression Analysis': 'Data Science & Analytics',
-    'Linear Regression': 'Data Science & Analytics',
-    'Time Series Analysis': 'Data Science & Analytics',
-    'Forecasting': 'Data Science & Analytics',
-    'Exploratory Data Analysis': 'Data Science & Analytics',
-    'Exploratory Data Analysis (EDA)': 'Data Science & Analytics',
-    'A/B Testing': 'Data Science & Analytics',
-    'Hypothesis Testing': 'Data Science & Analytics',
-    'Statistical Hypothesis Testing': 'Data Science & Analytics',
-    'Feature Engineering': 'Data Science & Analytics',
-    'CRISP-DM': 'Data Science & Analytics',
-    'CRISP-DM Lifecycle': 'Data Science & Analytics',
-    'Class Imbalance Handling': 'Data Science & Analytics',
-    'Model Interpretation': 'Data Science & Analytics'
-};
-
-const SKILL_NORMALIZATION_MAP: Record<string, string> = {
-    // Programming & Languages
-    'Python Programming': 'Python',
-    'Python (Pandas, Scikit-Learn)': 'Python',
-    'Python (Pandas, NumPy, Scikit-Learn)': 'Python',
-    'Standard SQL': 'SQL',
-    'Google BigQuery (SQL)': 'SQL',
-    'Google BigQuery': 'BigQuery',
-
-    // Visualization & BI
-    'Google Looker Studio': 'Looker Studio',
-    'Power BI (DAX)': 'Power BI',
-    'Power BI (DAX, Power Query)': 'Power BI',
-    'Tableau Software': 'Tableau',
-    'IBM Cognos Analytics': 'Cognos Analytics',
-
-    // Tools & Engineering
-    'Microsoft Excel': 'Excel',
-    'Microsoft Excel (Advanced)': 'Excel',
-    'Excel Formulas': 'Excel',
-    'GitHub': 'Git/GitHub',
-    'Git': 'Git/GitHub',
-    'Git/GitHub (Version Control)': 'Git/GitHub',
-
-    // Methodologies & Analysis
-    'Exploratory Data Analysis (EDA)': 'Exploratory Data Analysis',
-    'CRISP-DM Lifecycle': 'CRISP-DM',
-    'Statistical Hypothesis Testing': 'Hypothesis Testing',
-    'Aggregate Functions': 'Advanced Excel',
-    'Conditional IF': 'Advanced Excel',
-    'VLOOKUP & HLOOKUP': 'Advanced Excel',
-    'INDEX MATCH': 'Advanced Excel',
-    'Pivot Tables': 'Advanced Excel',
-    'Math Functions': 'Advanced Excel',
-    'Date & Time Manipulation': 'Advanced Excel',
-    'Logical Functions': 'Advanced Excel',
-    'Dynamic Arrays': 'Advanced Excel',
-    'Cell Referencing': 'Advanced Excel'
-};
-
-const normalizeSkill = (skill: string): string => {
-    return SKILL_NORMALIZATION_MAP[skill] || skill;
-};
-
-const getCategory = (skill: string): string => {
-    const normalized = normalizeSkill(skill);
-    // Try exact match on normalized
-    if (SKILL_CATEGORY_MAP[normalized]) return SKILL_CATEGORY_MAP[normalized];
-    if (SKILL_CATEGORY_MAP[skill]) return SKILL_CATEGORY_MAP[skill];
-
-    // Try partial match
-    const lowerSkill = skill.toLowerCase();
-    if (lowerSkill.includes('python') || lowerSkill.includes('sql') || lowerSkill.includes('query')) return 'Programming & Databases';
-    if (lowerSkill.includes('visualization') || lowerSkill.includes('dashboard') || lowerSkill.includes('bi ') || lowerSkill.includes('power bi') || lowerSkill.includes('tableau') || lowerSkill.includes('looker') || lowerSkill.includes('cognos')) return 'Data Visualization & BI';
-    if (lowerSkill.includes('engineering') || lowerSkill.includes('pipeline') || lowerSkill.includes('warehouse') || lowerSkill.includes('excel') || lowerSkill.includes('git') || lowerSkill.includes('cloud') || lowerSkill.includes('model') || lowerSkill.includes('etl')) return 'Data Engineering';
-    if (lowerSkill.includes('science') || lowerSkill.includes('learning') || lowerSkill.includes('statistic') || lowerSkill.includes('analysis') || lowerSkill.includes('eda') || lowerSkill.includes('regression')) return 'Data Science & Analytics';
-
-    return 'Data Science & Analytics'; // Default
-};
-
-const aggregateSkills = () => {
-    const rawSkills: string[] = [];
-
-    // 1. Skills from Education (CERTIFICATES)
-    CERTIFICATES.forEach(cert => {
-        if (cert.skillCategories) {
-            Object.values(cert.skillCategories).flat().forEach(s => rawSkills.push(s));
-        } else if (cert.skills) {
-            cert.skills.forEach(s => rawSkills.push(s));
-        }
-    });
-
-    // 2. Technologies and Methodologies from Project Portfolio (PROJECTS)
-    PROJECTS.forEach(project => {
-        if (project.technologyCategories) {
-            Object.values(project.technologyCategories).flat().forEach(s => rawSkills.push(s));
-        } else if (project.technologies) {
-            project.technologies.forEach(s => rawSkills.push(s));
-        }
-
-        if (project.methodologyCategories) {
-            Object.values(project.methodologyCategories).flat().forEach(s => rawSkills.push(s));
-        } else if (project.methodologies) {
-            project.methodologies.forEach(s => rawSkills.push(s));
-        }
-    });
-
-    // 3. Skills from Professional Experience (INTERNSHIPS)
-    INTERNSHIPS.forEach(intern => {
-        if (intern.skillCategories) {
-            Object.values(intern.skillCategories).flat().forEach(s => rawSkills.push(s));
-        } else if (intern.skills) {
-            intern.skills.forEach(s => rawSkills.push(s));
-        }
-    });
-
-    // Unique and organized skills
-    const categorized: Record<string, Set<string>> = {
-        'Programming & Databases': new Set(),
-        'Data Visualization & BI': new Set(),
-        'Data Engineering': new Set(),
-        'Data Science & Analytics': new Set()
-    };
-
-    rawSkills.forEach(skill => {
-        const normalized = normalizeSkill(skill);
-        const cat = getCategory(normalized);
-        if (categorized[cat]) {
-            categorized[cat].add(normalized);
-        }
-    });
-
-    return [
+export const SKILLS_SECTION_DATA = {
+    title: "Technical Skill",
+    categories: [
         {
             name: 'Programming & Databases',
-            skills: Array.from(categorized['Programming & Databases']).sort(),
             icon: 'Terminal'
         },
         {
             name: 'Data Visualization & BI',
-            skills: Array.from(categorized['Data Visualization & BI']).sort(),
             icon: 'BarChart3'
         },
         {
             name: 'Data Engineering',
-            skills: Array.from(categorized['Data Engineering']).sort(),
             icon: 'Database'
         },
         {
             name: 'Data Science & Analytics',
-            skills: Array.from(categorized['Data Science & Analytics']).sort(),
             icon: 'Cpu'
         }
-    ];
+    ]
 };
 
 export interface DetailedSkill {
@@ -1085,7 +951,8 @@ export const DETAILED_SKILLS: DetailedSkill[] = [
     }
 ];
 
-export const SKILLS = aggregateSkills();
+
+export const SKILLS = []; // Manual override or remove if unused
 
 
 export const CONTACT_INFO = {
@@ -1103,6 +970,8 @@ export const getDropdownItems = (sectionName: string) => {
             return PROJECTS.map(p => ({ label: p.title, href: `#${p.id}` }))
         case 'Education':
             return CERTIFICATES.map(c => ({ label: c.title, href: `#${c.id}` }))
+        case 'Certification':
+            return CERTIFICATIONS.map(c => ({ label: c.title, href: `#${c.id}` }))
         case 'Experience':
             return INTERNSHIPS.map(i => ({ label: i.title, href: `#${i.id}` }))
         case 'Skill':

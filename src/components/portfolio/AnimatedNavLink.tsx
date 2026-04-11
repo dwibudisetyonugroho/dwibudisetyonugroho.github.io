@@ -14,6 +14,8 @@ interface AnimatedNavLinkProps {
     onHoverChange?: (isHovered: boolean) => void
     hasDropdown?: boolean
     isHovered?: boolean
+    subItems?: { label: string; href: string }[]
+    activeSubId?: string | null
 }
 
 export const AnimatedNavLink = ({
@@ -24,7 +26,9 @@ export const AnimatedNavLink = ({
     isActive = false,
     onHoverChange,
     hasDropdown = false,
-    isHovered = false
+    isHovered = false,
+    subItems = [],
+    activeSubId = null
 }: AnimatedNavLinkProps) => {
     return (
         <div
@@ -40,12 +44,35 @@ export const AnimatedNavLink = ({
                 initial="initial"
             >
 
-                {/* Text - scales subtly on hover without scaling the indicator pill */}
-                <motion.span
-                    className={`relative z-10 transition-colors duration-200 ${isActive || isHovered ? 'text-[#FF5B00]' : 'text-black'}`}
-                >
-                    {text}
-                </motion.span>
+                {/* Text Container - now relative to house the dots strictly under the text */}
+                <span className="relative z-10 flex flex-col items-center">
+                    <span className={`transition-colors duration-200 ${isActive || isHovered ? 'text-[#FF5B00]' : 'text-black'}`}>
+                        {text}
+                    </span>
+
+                    {/* Progress Dots Indicator - strictly under text */}
+                    <AnimatePresence>
+                        {isActive && subItems.length > 0 && (
+                            <motion.div 
+                                initial={{ opacity: 0, y: -2 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -2 }}
+                                className="absolute -bottom-1.5 flex justify-center gap-1.5 px-1 pointer-events-none"
+                            >
+                                {subItems.map((si) => (
+                                    <div 
+                                        key={si.href}
+                                        className={`w-[5px] h-[5px] rounded-full transition-all duration-300 ${
+                                            activeSubId === si.href.substring(1)
+                                                ? 'bg-[#FF5B00] scale-125 shadow-[0_0_8px_rgba(255,91,0,0.4)]'
+                                                : 'bg-black/20'
+                                        }`}
+                                    />
+                                ))}
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </span>
 
                 {hasDropdown && (
                     <motion.div

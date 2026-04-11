@@ -79,6 +79,12 @@ export const CertificatesSection = () => {
                                                         alt="MySkill Logo"
                                                         className="w-full h-full object-contain opacity-90 group-hover:opacity-100 item-hover"
                                                     />
+                                                ) : cert.issuer === 'DataCamp' ? (
+                                                    <img
+                                                        src="/logos/datacamp-sql-logo.png"
+                                                        alt="DataCamp Logo"
+                                                        className="w-full h-full object-contain opacity-90 group-hover:opacity-100 item-hover"
+                                                    />
                                                 ) : null}
                                             </div>
                                         </div>
@@ -192,8 +198,11 @@ export const CertificatesSection = () => {
 
 
                                         {/* Simplified Skills Section - Smart Show More */}
-                                        {cert.skillCategories && (
-                                            <SkillsList skills={Object.values(cert.skillCategories).flat()} title={(cert as any).skillsTitle || "Technical Skill"} />
+                                        {(cert.skillCategories || (cert as any).skills) && (
+                                            <SkillsList 
+                                                skills={cert.skillCategories ? Object.values(cert.skillCategories).flat() : (cert as any).skills} 
+                                                title={(cert as any).skillsTitle || "Technical Skill"} 
+                                            />
                                         )}
 
                                         {/* Bottom action bar - flush to card edges */}
@@ -221,7 +230,7 @@ export const CertificatesSection = () => {
                                                         >
                                                             <a href={cert.verificationUrl || '#'} target="_blank" rel="noopener noreferrer">
                                                                 <ExternalLink className="h-4 w-4 mr-2" />
-                                                                Verify on Coursera
+                                                                {cert.platform ? `Verify on ${cert.platform}` : 'Verify on Coursera'}
                                                             </a>
                                                         </Button>
                                                     </>
@@ -336,6 +345,19 @@ export const CertificatesSection = () => {
                                                                 src="/logos/my-skill-logo.png"
                                                                 alt="MySkill Logo"
                                                                 className="h-4 w-auto"
+                                                            />
+                                                        </a>
+                                                    ) : cert.issuer === 'DataCamp' ? (
+                                                        <a
+                                                            href="https://www.datacamp.com/tracks/sql-fundamentals"
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="hover:opacity-80 item-hover"
+                                                        >
+                                                            <img
+                                                                src="/logos/datacamp-sql-logo.png"
+                                                                alt="DataCamp Logo"
+                                                                className="h-[22px] w-auto"
                                                             />
                                                         </a>
                                                     ) : null}

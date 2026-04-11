@@ -3,6 +3,7 @@
 import { Navigation } from '@/components/portfolio/Navigation'
 import { HeroSection } from '@/components/portfolio/HeroSection'
 import { SkillsSection } from '@/components/portfolio/SkillsSection'
+import { CertificationsSection } from '@/components/portfolio/CertificationsSection'
 import { CertificatesSection } from '@/components/portfolio/CertificatesSection'
 import { ProjectsSection } from '@/components/portfolio/ProjectsSection'
 import { InternshipsSection } from '@/components/portfolio/InternshipsSection'
@@ -17,6 +18,7 @@ export default function Home() {
       <Navigation />
       <HeroSection />
       <SkillsSection />
+      <CertificationsSection />
       <CertificatesSection />
       <ProjectsSection />
       <InternshipsSection />

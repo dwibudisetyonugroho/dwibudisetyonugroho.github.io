@@ -14,7 +14,10 @@ export const Navigation = () => {
     const [activeSection, setActiveSection] = useState('')
     const [isConnectOpen, setIsConnectOpen] = useState(false)
     const [hoveredNavItem, setHoveredNavItem] = useState<string | null>(null)
+    const [activeSubItem, setActiveSubItem] = useState<string | null>(null)
     const hoverTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+    const PROGRESS_DOTS_SECTIONS = ['Certification', 'Education', 'Project', 'Experience']
 
     const clearHoverTimeout = () => {
         if (hoverTimeout.current) {
@@ -27,7 +30,7 @@ export const Navigation = () => {
         hoverTimeout.current = setTimeout(() => {
             setHoveredNavItem(null)
             setIsConnectOpen(false)
-        }, 200)
+        }, 100)
     }
 
     useEffect(() => {
@@ -45,14 +48,38 @@ export const Navigation = () => {
             }
         )
 
+        // Sub-item observer for progress dots
+        const subObserver = new IntersectionObserver(
+            (entries) => {
+                const visible = entries.find(e => e.isIntersecting);
+                if (visible) {
+                    setActiveSubItem(visible.target.id);
+                }
+            },
+            { 
+                threshold: 0.2,
+                rootMargin: '-20% 0px -20% 0px'
+            }
+        )
+
         setTimeout(() => {
             document.querySelectorAll('section[id]').forEach((section) => {
                 observer.observe(section)
             })
-        }, 100)
+
+            // Collect and observe all sub-item IDs for dot tracking
+            const subItemIds = PROGRESS_DOTS_SECTIONS.flatMap(name => 
+                getDropdownItems(name).map(item => item.href.replace('#', ''))
+            )
+            subItemIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) subObserver.observe(el);
+            });
+        }, 500)
 
         return () => {
             observer.disconnect()
+            subObserver.disconnect()
         }
     }, [])
 
@@ -70,7 +97,7 @@ export const Navigation = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
+                        transition={{ duration: 0.15 }}
                         className="fixed bg-black/60 backdrop-blur-sm pointer-events-none -z-10"
                         style={{ top: '-20px', left: '-20px', width: '110vw', height: '120vh' }}
                     />
@@ -84,7 +111,7 @@ export const Navigation = () => {
                 onMouseLeave={handleMouseLeaveNav}
             >
                 {/* Main nav row */}
-                <div className="pointer-events-auto w-full bg-white backdrop-blur-[2px] border border-gray-200 rounded-2xl shadow-lg shadow-black/10 h-14 flex items-center px-5 gap-4 transition-all duration-300">
+                <div className="pointer-events-auto w-full bg-white backdrop-blur-[2px] border border-gray-200 rounded-2xl shadow-lg shadow-black/10 h-14 flex items-center px-5 gap-4 transition-all duration-300 relative z-50">
 
                     {/* Logo - width locked to prevent layout shift */}
                     <div className="flex items-center flex-shrink-0 w-[120px]">
@@ -93,24 +120,33 @@ export const Navigation = () => {
 
                     {/* Nav links — left-aligned, flowing after logo */}
                     <div className="flex items-center gap-1">
-                        {NAVIGATION_ITEMS.map((item) => (
-                            <AnimatedNavLink
-                                key={item.name}
-                                href={item.href}
-                                text={item.name}
-                                className="text-lg font-medium whitespace-nowrap px-3"
-                                isActive={activeSection === item.href.substring(1)}
-                                onHoverChange={(hovered) => {
-                                    if (hovered) {
-                                        clearHoverTimeout()
-                                        setHoveredNavItem(item.name)
-                                        setIsConnectOpen(false)
-                                    }
-                                }}
-                                hasDropdown={getDropdownItems(item.name).length > 0}
-                                isHovered={hoveredNavItem === item.name}
-                            />
-                        ))}
+                        {NAVIGATION_ITEMS.map((item) => {
+                            const isSectionActive = activeSection === item.href.substring(1)
+                            const showDots = PROGRESS_DOTS_SECTIONS.includes(item.name) && isSectionActive
+                            const subItems = showDots ? getDropdownItems(item.name) : []
+
+                            return (
+                                <div key={item.name} className="relative flex flex-col items-center">
+                                    <AnimatedNavLink
+                                        href={item.href}
+                                        text={item.name}
+                                        className="text-lg font-medium whitespace-nowrap px-3"
+                                        isActive={isSectionActive}
+                                        onHoverChange={(hovered) => {
+                                            if (hovered) {
+                                                clearHoverTimeout()
+                                                setHoveredNavItem(item.name)
+                                                setIsConnectOpen(false)
+                                            }
+                                        }}
+                                        hasDropdown={getDropdownItems(item.name).length > 0}
+                                        isHovered={hoveredNavItem === item.name}
+                                        subItems={subItems}
+                                        activeSubId={activeSubItem}
+                                    />
+                                </div>
+                            )
+                        })}
                     </div>
 
                     {/* Spacer */}
@@ -119,7 +155,14 @@ export const Navigation = () => {
                     {/* Badges & Connect CTA — far right */}
                     <div className="flex items-center gap-4">
                         {/* Credentials Badges */}
-                        <div className="flex items-center gap-2">
+                        <div 
+                            className="flex items-center gap-2"
+                            onMouseEnter={() => {
+                                clearHoverTimeout()
+                                setHoveredNavItem(null)
+                                setIsConnectOpen(false)
+                            }}
+                        >
                             {/* IBM Badge */}
                             <a 
                                 href="https://www.credly.com/badges/7e329c4d-879a-4bf0-a40f-9c24152ff159/public_url"
@@ -203,6 +246,34 @@ export const Navigation = () => {
                                     </div>
                                 </div>
                             </a>
+
+                            {/* DataCamp SQL Associate Badge */}
+                            <a 
+                                href="https://www.datacamp.com/certificate/SQA0014758676777"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex-shrink-0 h-10 w-10 relative group cursor-pointer"
+                            >
+                                <img 
+                                    src="/logos/datacamp-sql-badge.png" 
+                                    alt="DataCamp SQL Associate Certification Badge"
+                                    className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-110"
+                                />
+                                {/* Full-size hover card */}
+                                <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[180px] p-6 bg-white/95 backdrop-blur-md border border-gray-100 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] opacity-0 group-hover:opacity-100 group-hover:translate-y-2 transition-all duration-300 pointer-events-none flex flex-col items-center gap-4 z-50">
+                                    <div className="relative h-28 w-28 flex-shrink-0">
+                                        <img 
+                                            src="/logos/datacamp-sql-badge.png" 
+                                            alt="DataCamp SQL Associate Full Badge"
+                                            className="h-full w-full object-contain drop-shadow-lg"
+                                        />
+                                    </div>
+                                    <div className="text-center">
+                                        <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">DataCamp Certification</div>
+                                        <div className="text-xs font-bold text-black leading-tight">SQL Associate</div>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
 
                         {/* Connect Button */}
@@ -249,7 +320,7 @@ export const Navigation = () => {
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
-                            transition={{ duration: 0.2 }}
+                            transition={{ duration: 0.15 }}
                             className="pointer-events-auto w-full bg-white backdrop-blur-[2px] border border-gray-200 rounded-2xl shadow-lg shadow-black/10 overflow-hidden absolute top-16 left-0 right-0 z-40"
                         >
                             <div className="py-2 flex flex-row pl-[152px] pr-4 gap-8">
@@ -277,7 +348,7 @@ export const Navigation = () => {
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
-                            transition={{ duration: 0.2 }}
+                            transition={{ duration: 0.15 }}
                             className="pointer-events-auto w-full bg-white backdrop-blur-[2px] border border-gray-200 rounded-2xl shadow-lg shadow-black/10 overflow-hidden absolute top-16 left-0 right-0 z-40"
                         >
                             <div className="py-2 flex flex-row pl-[152px] pr-4 gap-8">

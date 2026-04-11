@@ -13,7 +13,7 @@ import ReactMarkdown from 'react-markdown'
 export const ProjectsSection = () => {
 
     return (
-        <section id="projects" className="py-16 bg-gray-200">
+        <section id="projects" className="py-16 bg-gray-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 className="text-4xl font-bold text-center mb-12 text-foreground">Project Portfolio</h2>
                 <div className="max-w-4xl mx-auto space-y-8">

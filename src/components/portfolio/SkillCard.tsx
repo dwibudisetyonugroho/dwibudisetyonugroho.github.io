@@ -23,15 +23,14 @@ export const SkillCard = ({ skill }: SkillCardProps) => {
                 id={`skills-${skill.name.toLowerCase().replace(/\s+/g, '-')}`}
                 className="shadow-sm bg-white text-foreground relative scroll-mt-24 overflow-hidden group transition-shadow duration-500 ease-out hover:shadow-xl h-full flex flex-col"
             >
-                <CardContent className="p-6 flex flex-col h-full min-h-[380px]">
-
+                <CardContent className="p-6 flex flex-col h-full overflow-hidden">
                     {/* Header Section */}
-                    <div className="">
+                    <div className="flex-shrink-0">
                         <h3 className="text-2xl font-bold text-foreground tracking-tight line-clamp-1">{skill.name}</h3>
                     </div>
 
-                    {/* Description */}
-                    <div className="mt-4 text-justify grow">
+                    {/* Description - Scrollable if too long */}
+                    <div className="mt-4 text-justify grow overflow-y-auto custom-scrollbar pr-2">
                         <p className="text-foreground/70 leading-relaxed text-[15px]">{skill.description}</p>
                     </div>
 
