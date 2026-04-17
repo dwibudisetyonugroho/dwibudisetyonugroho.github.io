@@ -7,7 +7,7 @@ import {
     GripVertical
 } from 'lucide-react'
 import { SkillCard } from './SkillCard'
-import { motion, animate, useMotionValue } from 'framer-motion'
+import { motion, animate, useMotionValue, useTransform } from 'framer-motion'
 
 // Memoized Skill Button to prevent re-renders of the entire list
 const SkillButton = memo(({ skill, index, isActive, onClick }: { 
@@ -34,61 +34,100 @@ SkillButton.displayName = 'SkillButton'
 
 export const SkillsSection = () => {
     const [selectedIndex, setSelectedIndex] = useState(0)
-    const selectedIndexRef = useRef(0)
     const trackRef = useRef<HTMLDivElement>(null)
     const isDragging = useRef(false)
     
-    // Low-level MotionValue for high-performance navigation
+    // Master MotionValue: current fractional index (0 to 11)
+    // This drives BOTH the pill and the filmstrip
+    const xIndex = useMotionValue(0)
+
+    // Derived MotionValues for visuals
+    const filmstripX = useTransform(xIndex, (v) => `-${v * 100}%`)
+    
+    // Pill position is based on xIndex and track width
     const pillX = useMotionValue(0)
+    const maxPillXRef = useRef(100)
 
-    // Programmatic movement (Sidebar clicks or Resize)
+    // Update pill pixel position whenever xIndex or track width changes
     useEffect(() => {
-        if (isDragging.current) return;
-
-        const updatePillPosition = () => {
+        const updatePillRange = () => {
             if (trackRef.current) {
                 const trackWidth = trackRef.current.offsetWidth
                 const pillWidth = trackWidth / DETAILED_SKILLS.length
-                const targetX = selectedIndex * pillWidth
-                animate(pillX, targetX, { type: "spring", stiffness: 400, damping: 40 })
+                const maxPixels = trackWidth - pillWidth
+                maxPillXRef.current = maxPixels
+                
+                // Keep pill in sync with index
+                pillX.set(xIndex.get() * (maxPixels / (DETAILED_SKILLS.length - 1)))
             }
         }
-        updatePillPosition()
-        window.addEventListener('resize', updatePillPosition)
-        return () => window.removeEventListener('resize', updatePillPosition)
-    }, [selectedIndex, pillX])
+        updatePillRange()
+        window.addEventListener('resize', updatePillRange)
+        return () => window.removeEventListener('resize', updatePillRange)
+    }, [xIndex, pillX])
+
+    // Sync pillX with xIndex changes (during animation or drag)
+    useEffect(() => {
+        return xIndex.on("change", (latest) => {
+            const maxPixels = maxPillXRef.current
+            pillX.set(latest * (maxPixels / (DETAILED_SKILLS.length - 1)))
+        })
+    }, [xIndex, pillX])
 
     const selectSkill = useCallback((index: number) => {
-        if (index === selectedIndexRef.current) return;
         setSelectedIndex(index)
-        selectedIndexRef.current = index
-    }, [])
+        animate(xIndex, index, { type: "spring", stiffness: 400, damping: 40 })
+    }, [xIndex])
 
-    const handleDragStart = () => {
-        isDragging.current = true
-    }
-
-    const handleDragEnd = () => {
-        isDragging.current = false
-        if (trackRef.current) {
-            const trackWidth = trackRef.current.offsetWidth
-            const pillWidth = trackWidth / DETAILED_SKILLS.length
-            const targetX = selectedIndexRef.current * pillWidth
-            animate(pillX, targetX, { type: "spring", stiffness: 400, damping: 40 })
+    // Global interceptor for deep links and header menu
+    const handleLinkClick = useCallback((e: MouseEvent) => {
+        const target = e.target as HTMLElement
+        const anchor = target.closest('a')
+        if (anchor && anchor.hash && anchor.hash.startsWith('#skills-')) {
+            const id = anchor.hash.substring(1)
+            const index = DETAILED_SKILLS.findIndex(s => 
+                `skills-${s.name.toLowerCase().replace(/\s+/g, '-')}` === id
+            )
+            if (index !== -1) {
+                selectSkill(index)
+            }
         }
-    }
+    }, [selectSkill])
+
+    useEffect(() => {
+        window.addEventListener('click', handleLinkClick)
+        const hash = window.location.hash
+        if (hash?.startsWith('#skills-')) {
+            const id = hash.substring(1)
+            const index = DETAILED_SKILLS.findIndex(s => `skills-${s.name.toLowerCase().replace(/\s+/g, '-')}` === id)
+            if (index !== -1) selectSkill(index)
+        }
+        return () => window.removeEventListener('click', handleLinkClick)
+    }, [handleLinkClick, selectSkill])
 
     const handleDrag = (_: any, info: any) => {
         if (!trackRef.current) return
         const rect = trackRef.current.getBoundingClientRect()
         const x = info.point.x - rect.left
         const percentage = Math.max(0, Math.min(1, x / rect.width))
-        const newIndex = Math.floor(percentage * DETAILED_SKILLS.length)
-        const constrainedIndex = Math.max(0, Math.min(newIndex, DETAILED_SKILLS.length - 1))
         
-        if (constrainedIndex !== selectedIndexRef.current) {
-            selectSkill(constrainedIndex)
+        // Update fractional index
+        const fractionalIndex = percentage * (DETAILED_SKILLS.length - 1)
+        xIndex.set(fractionalIndex)
+        
+        // Update sidebar integer index
+        const nearestIndex = Math.round(percentage * (DETAILED_SKILLS.length - 1))
+        if (nearestIndex !== selectedIndex) {
+            setSelectedIndex(nearestIndex)
         }
+    }
+
+    const handleDragEnd = () => {
+        isDragging.current = false
+        // Snap to nearest whole index
+        const current = xIndex.get()
+        const nearest = Math.round(current)
+        selectSkill(nearest)
     }
 
     return (
@@ -117,11 +156,9 @@ export const SkillsSection = () => {
                     {/* Right Side: Filmstrip Carousel Layout */}
                     <div className="w-full md:w-1/2 lg:w-7/12 flex flex-col md:h-[420px]">
                         <div className="overflow-hidden grow flex flex-col">
-                            {/* The Filmstrip Container */}
                             <motion.div 
                                 className="flex h-full"
-                                animate={{ x: `-${selectedIndex * 100}%` }}
-                                transition={{ type: "spring", stiffness: 400, damping: 40 }}
+                                style={{ x: filmstripX }}
                             >
                                 {DETAILED_SKILLS.map((skill, i) => (
                                     <div key={i} className="w-full h-full flex-shrink-0 px-1">
@@ -131,7 +168,7 @@ export const SkillsSection = () => {
                             </motion.div>
                         </div>
 
-                        {/* Optimized Draggable Pill Scroll Bar */}
+                        {/* Draggable Pill Scroll Bar */}
                         <div className="mt-8 px-2 select-none">
                             <div className="flex items-center justify-between text-[10px] font-bold text-foreground/40 uppercase tracking-widest mb-3">
                                 <span className="flex items-center gap-2">
@@ -145,14 +182,13 @@ export const SkillsSection = () => {
                                 ref={trackRef}
                                 className="relative h-4 w-full bg-white border border-slate-200 rounded-full cursor-pointer overflow-hidden backdrop-blur-sm"
                                 onClick={(e) => {
-                                    if (!trackRef.current || isDragging.current) return
+                                    if (!trackRef.current) return
                                     const rect = trackRef.current.getBoundingClientRect()
                                     const x = e.clientX - rect.left
                                     const percentage = Math.max(0, Math.min(1, x / rect.width))
-                                    selectSkill(Math.min(Math.floor(percentage * DETAILED_SKILLS.length), DETAILED_SKILLS.length - 1))
+                                    selectSkill(Math.round(percentage * (DETAILED_SKILLS.length - 1)))
                                 }}
                             >
-                                {/* Track Indicators (Faint dots) */}
                                 <div className="absolute inset-0 flex items-center px-[2%] pointer-events-none">
                                     {DETAILED_SKILLS.map((_, i) => (
                                         <div key={i} className="flex-1 flex justify-center">
@@ -161,7 +197,6 @@ export const SkillsSection = () => {
                                     ))}
                                 </div>
                                 
-                                {/* Draggable Pill */}
                                 <motion.div 
                                     className="absolute top-1 bottom-1 bg-[#023047] rounded-full shadow-lg flex items-center justify-center cursor-grab active:cursor-grabbing z-20 group"
                                     style={{ 
@@ -172,7 +207,7 @@ export const SkillsSection = () => {
                                     dragConstraints={trackRef}
                                     dragElastic={0}
                                     dragMomentum={false}
-                                    onDragStart={handleDragStart}
+                                    onDragStart={() => { isDragging.current = true }}
                                     onDrag={handleDrag}
                                     onDragEnd={handleDragEnd}
                                 >

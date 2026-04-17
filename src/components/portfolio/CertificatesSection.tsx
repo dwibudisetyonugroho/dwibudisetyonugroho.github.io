@@ -349,7 +349,7 @@ export const CertificatesSection = () => {
                                                         </a>
                                                     ) : cert.issuer === 'DataCamp' ? (
                                                         <a
-                                                            href="https://www.datacamp.com/tracks/sql-fundamentals"
+                                                            href={cert.officialPageUrl || "https://www.datacamp.com/tracks/sql-fundamentals"}
                                                             target="_blank"
                                                             rel="noopener noreferrer"
                                                             className="hover:opacity-80 item-hover"

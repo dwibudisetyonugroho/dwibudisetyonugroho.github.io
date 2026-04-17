@@ -15,6 +15,8 @@ export const Navigation = () => {
     const [isConnectOpen, setIsConnectOpen] = useState(false)
     const [hoveredNavItem, setHoveredNavItem] = useState<string | null>(null)
     const [activeSubItem, setActiveSubItem] = useState<string | null>(null)
+    const sectionRatios = useRef<{ [key: string]: number }>({})
+    const intersectionRatios = useRef<{ [key: string]: number }>({})
     const hoverTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
 
     const PROGRESS_DOTS_SECTIONS = ['Certification', 'Education', 'Project', 'Experience']
@@ -37,28 +39,53 @@ export const Navigation = () => {
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        setActiveSection(entry.target.id)
+                    sectionRatios.current[entry.target.id] = entry.intersectionRatio;
+                });
+
+                let maxRatio = 0;
+                let activeId = null;
+
+                Object.entries(sectionRatios.current).forEach(([id, ratio]) => {
+                    if (ratio > maxRatio) {
+                        maxRatio = ratio;
+                        activeId = id;
                     }
-                })
+                });
+
+                if (activeId && maxRatio > 0.1) {
+                    setActiveSection(activeId);
+                }
             },
             {
-                rootMargin: '-50% 0px -50% 0px',
-                threshold: 0
+                threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+                rootMargin: '-10% 0px -20% 0px'
             }
         )
 
         // Sub-item observer for progress dots
         const subObserver = new IntersectionObserver(
             (entries) => {
-                const visible = entries.find(e => e.isIntersecting);
-                if (visible) {
-                    setActiveSubItem(visible.target.id);
+                entries.forEach(entry => {
+                    intersectionRatios.current[entry.target.id] = entry.intersectionRatio;
+                });
+
+                let maxRatio = 0;
+                let activeId = null;
+
+                Object.entries(intersectionRatios.current).forEach(([id, ratio]) => {
+                    if (ratio > maxRatio) {
+                        maxRatio = ratio;
+                        activeId = id;
+                    }
+                });
+
+                if (activeId && maxRatio > 0.05) {
+                    setActiveSubItem(activeId);
                 }
             },
             { 
-                threshold: 0.2,
-                rootMargin: '-20% 0px -20% 0px'
+                threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+                rootMargin: '-15% 0px -25% 0px'
             }
         )
 
@@ -271,6 +298,34 @@ export const Navigation = () => {
                                     <div className="text-center">
                                         <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">DataCamp Certification</div>
                                         <div className="text-xs font-bold text-black leading-tight">SQL Associate</div>
+                                    </div>
+                                </div>
+                            </a>
+
+                            {/* DataCamp Data Analyst Associate Badge */}
+                            <a 
+                                href="https://www.datacamp.com/certificate/DAA0010794897681"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex-shrink-0 h-10 w-10 relative group cursor-pointer"
+                            >
+                                <img 
+                                    src="/logos/datacamp-data-analyst-badge.png" 
+                                    alt="DataCamp Data Analyst Associate Certification Badge"
+                                    className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-110"
+                                />
+                                {/* Full-size hover card */}
+                                <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[180px] p-6 bg-white/95 backdrop-blur-md border border-gray-100 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] opacity-0 group-hover:opacity-100 group-hover:translate-y-2 transition-all duration-300 pointer-events-none flex flex-col items-center gap-4 z-50">
+                                    <div className="relative h-28 w-28 flex-shrink-0">
+                                        <img 
+                                            src="/logos/datacamp-data-analyst-badge.png" 
+                                            alt="DataCamp Data Analyst Associate Full Badge"
+                                            className="h-full w-full object-contain drop-shadow-lg"
+                                        />
+                                    </div>
+                                    <div className="text-center">
+                                        <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">DataCamp Certification</div>
+                                        <div className="text-xs font-bold text-black leading-tight">Data Analyst Associate</div>
                                     </div>
                                 </div>
                             </a>

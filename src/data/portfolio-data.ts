@@ -21,21 +21,51 @@ export const ABOUT_DATA = {
 
 export const CERTIFICATIONS = [
     {
+        id: 'datacamp-data-analyst-associate',
+        title: 'Data Analyst Associate Certification',
+        issuer: 'DataCamp',
+        officialPageUrl: 'https://www.datacamp.com/certification/data-analyst',
+        date: '10 April 2026',
+        certificateType: 'DataCamp Certification',
+        description: 'Validated by DataCamp through a series of timed technical exams and a real-world practical case study. Demonstrated proficiency in using SQL for complex data management, performing exploratory data analysis (EDA), and applying statistical concepts to drive business decisions.',
+        credentialId: 'DAA0010794897681',
+        certificateUrl: '/certificates/DataCamp-Data-Analyst-Associate.pdf',
+        verificationUrl: 'https://www.datacamp.com/certificate/DAA0010794897681',
+        platform: 'DataCamp',
+        skillCategories: {
+            'Data Analysis': [
+                'SQL',
+                'Exploratory Data Analysis (EDA)',
+                'Statistical Testing',
+                'Data Cleaning',
+                'Visualization',
+                'Business Communication'
+            ]
+        }
+    },
+    {
         id: 'datacamp-sql-associate',
         title: 'SQL Associate Certification',
         issuer: 'DataCamp',
+        officialPageUrl: 'https://www.datacamp.com/certification/sql-associate',
         date: '10 April 2026',
         certificateType: 'DataCamp Certification',
-        description: 'Validated proficiency in essential SQL skills for data analysis, including data manipulation, joining tables, and summarizing datasets. This certification involves a rigorous timed exam and practical application of SQL queries to real-world business scenarios.',
+        description: 'Validated by DataCamp through a rigorous technical exam and a practical business case study. Proficient in end-to-end database workflows, including complex data extraction, joining, and aggregation. Specialized in cleaning and validating raw datasets to ensure data integrity for business reporting and metric calculation.',
         credentialId: 'SQA0014758676777',
+        certificateUrl: '/certificates/DataCamp-SQL-Associate.pdf',
         verificationUrl: 'https://www.datacamp.com/certificate/SQA0014758676777',
         platform: 'DataCamp',
         skillCategories: {
-            'SQL Analysis': [
-                'Data Manipulation',
-                'Joining Tables',
-                'Summarizing Datasets',
-                'SQL Queries'
+            'Technical Skills': [
+                'PostgreSQL',
+                'Data Cleaning',
+                'Joins',
+                'Aggregations',
+                'Subqueries',
+                'CTEs',
+                'Window Functions',
+                'EDA',
+                'Schemas'
             ]
         }
     }
@@ -46,6 +76,7 @@ export const CERTIFICATES = [
         id: 'datacamp-sql-fundamentals',
         title: 'SQL Fundamentals',
         issuer: 'DataCamp',
+        officialPageUrl: 'https://www.datacamp.com/tracks/sql-fundamentals',
         courseCount: '7',
         certificateType: 'DataCamp Education',
         level: 'Intermediate',

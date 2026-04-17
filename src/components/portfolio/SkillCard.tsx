@@ -17,29 +17,29 @@ export const SkillCard = ({ skill }: SkillCardProps) => {
             variants={cardHoverVariants}
             initial="initial"
             whileHover="hover"
-            className="w-full"
+            className="w-full skill-card-item"
         >
             <Card
                 id={`skills-${skill.name.toLowerCase().replace(/\s+/g, '-')}`}
                 className="shadow-sm bg-white text-foreground relative scroll-mt-24 overflow-hidden group transition-shadow duration-500 ease-out hover:shadow-xl h-full flex flex-col"
             >
                 <CardContent className="p-6 flex flex-col h-full overflow-hidden">
-                    {/* Header Section */}
-                    <div className="flex-shrink-0">
+                    {/* Header Section - Fixed Height */}
+                    <div className="flex-shrink-0 h-[40px] flex items-center">
                         <h3 className="text-2xl font-bold text-foreground tracking-tight line-clamp-1">{skill.name}</h3>
                     </div>
 
-                    {/* Description - Scrollable if too long */}
-                    <div className="mt-4 text-justify grow overflow-y-auto custom-scrollbar pr-2">
+                    {/* Description - Fixed Height & Scrollable */}
+                    <div className="mt-4 text-justify h-[160px] overflow-y-auto custom-scrollbar pr-2 flex-shrink-0">
                         <p className="text-foreground/70 leading-relaxed text-[15px]">{skill.description}</p>
                     </div>
 
-                    {/* Applied In Section */}
-                    {skill.appliedIn.length > 0 && (
-                        <div className="mt-6 pt-6 mb-6 border-t border-[#E2E8F0]">
-                            <div className="flex items-center justify-between mb-4">
-                                <h4 className="text-sm font-bold text-black uppercase tracking-wider">Applied In:</h4>
-                            </div>
+                    {/* Applied In Section - Pushed to Bottom */}
+                    <div className="mt-auto border-t border-[#E2E8F0] pt-6">
+                        <div className="flex items-center justify-between mb-4">
+                            <h4 className="text-sm font-bold text-black uppercase tracking-wider">Applied In:</h4>
+                        </div>
+                        {skill.appliedIn.length > 0 ? (
                             <div className="flex flex-wrap gap-2">
                                 {skill.appliedIn.map((project, idx) => (
                                     <a
@@ -52,8 +52,12 @@ export const SkillCard = ({ skill }: SkillCardProps) => {
                                     </a>
                                 ))}
                             </div>
-                        </div>
-                    )}
+                        ) : (
+                            <div className="h-8 flex items-center">
+                                <span className="text-xs italic text-black/30 font-medium">Core technical competency</span>
+                            </div>
+                        )}
+                    </div>
                 </CardContent>
             </Card>
         </motion.div>

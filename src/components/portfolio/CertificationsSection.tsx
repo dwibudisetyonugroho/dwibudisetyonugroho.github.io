@@ -182,7 +182,7 @@ export const CertificationsSection = () => {
                                                         >
                                                             <a href={(cert as any).certificateUrl} target="_blank" rel="noopener noreferrer">
                                                                 <ExternalLink className="h-4 w-4 mr-2" />
-                                                                View Certificate
+                                                                View Certification
                                                             </a>
                                                         </Button>
 
@@ -193,7 +193,7 @@ export const CertificationsSection = () => {
                                                         >
                                                             <a href={cert.verificationUrl || '#'} target="_blank" rel="noopener noreferrer">
                                                                 <ExternalLink className="h-4 w-4 mr-2" />
-                                                                Verify on Coursera
+                                                                {cert.platform ? `Verify on ${cert.platform}` : 'Verify Credential'}
                                                             </a>
                                                         </Button>
                                                     </>
@@ -249,7 +249,7 @@ export const CertificationsSection = () => {
                                                             <img src="/logos/my-skill-logo.png" alt="MySkill Logo" className="h-4 w-auto" />
                                                         </a>
                                                     ) : cert.issuer === 'DataCamp' ? (
-                                                        <a href="https://www.datacamp.com/certification/sql-associate" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 item-hover">
+                                                        <a href={cert.officialPageUrl || "https://www.datacamp.com/certification/sql-associate"} target="_blank" rel="noopener noreferrer" className="hover:opacity-80 item-hover">
                                                             <img src="/logos/datacamp-sql-logo.png" alt="DataCamp Logo" className="h-[22px] w-auto" />
                                                         </a>
                                                     ) : null}

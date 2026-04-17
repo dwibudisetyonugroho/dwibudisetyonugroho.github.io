@@ -215,7 +215,7 @@ export const Footer = () => {
                         <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-4 mb-8">
                             {/* Career Status Badge */}
                             <a 
-                                href="/resume.pdf"
+                                href="/Dwi_Budi_Setyonugroho_Resume.pdf"
                                 target="_blank"
                                 className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black font-bold text-sm rounded-xl hover:bg-secondary hover:text-white transition-all duration-300 group shadow-lg shadow-white/5"
                             >
