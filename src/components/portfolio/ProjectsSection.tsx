@@ -29,10 +29,20 @@ export const ProjectsSection = () => {
                                     {/* Badges - Flush Top Left */}
                                     {(project as any).type && (
                                         <div className="flex items-center gap-0 mb-6 -mt-8 -ml-8">
-                                            <span className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold bg-secondary/10 text-secondary">
-                                                <Award className="h-3.5 w-3.5" />
-                                                {(project as any).type}
-                                            </span>
+                                            {(project as any).typeLink ? (
+                                                <a
+                                                    href={(project as any).typeLink}
+                                                    className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold bg-secondary/10 text-secondary hover:bg-secondary/20 transition-colors cursor-pointer group/badge"
+                                                >
+                                                    <Award className="h-3.5 w-3.5" />
+                                                    {(project as any).type}
+                                                </a>
+                                            ) : (
+                                                <span className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold bg-secondary/10 text-secondary">
+                                                    <Award className="h-3.5 w-3.5" />
+                                                    {(project as any).type}
+                                                </span>
+                                            )}
                                         </div>
                                     )}
 

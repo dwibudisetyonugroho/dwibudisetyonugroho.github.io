@@ -644,6 +644,68 @@ export const INTERNSHIPS = [
 
 export const PROJECTS = [
     {
+        id: 'salifort-motors-retention',
+        title: 'Predictive Modeling for Employee Retention: Salifort Motors',
+        logo: '',
+        type: 'Google Advanced Data Analytics Professional Certificate Capstone Project',
+        typeLink: '#google-advanced-data-analytics',
+        description: "Led the end-to-end data analytics lifecycle for Salifort Motors to diagnose a critical 23.8% employee turnover crisis by developing a predictive Random Forest model that achieved 99% accuracy and identified key drivers like satisfaction and workload. Translated complex technical findings into actionable strategic recommendations, directly enabling leadership to implement targeted retention interventions in high-risk departments.",
+        technologies: [
+            'Python (Pandas, NumPy, Scikit-Learn, Matplotlib, Seaborn)',
+            'Power BI (DAX, Data Modeling)',
+            'Git/GitHub'
+        ],
+        technologyCategories: {
+            'Data Science': [
+                'Python (Pandas, NumPy, Scikit-Learn, Matplotlib, Seaborn)'
+            ],
+            'Business Intelligence': [
+                'Power BI (DAX, Data Modeling)'
+            ],
+            'Development Tools': [
+                'Git/GitHub'
+            ]
+        },
+        methodologies: [
+            'Data Cleaning & Standardization',
+            'Exploratory Data Analysis (EDA)',
+            'One-Hot & Ordinal Encoding',
+            'Train-Test Splitting',
+            'Logistic Regression Baseline vs. Random Forest Classifier',
+            '5-Fold Cross-Validation',
+            'Feature Importance Analysis',
+            'Bias/Fairness Testing across departments'
+        ],
+        methodologyCategories: {
+            'Data Engineering': [
+                'Data Cleaning & Standardization',
+                'One-Hot & Ordinal Encoding',
+                'Train-Test Splitting'
+            ],
+            'Analysis & Modeling': [
+                'Exploratory Data Analysis (EDA)',
+                'Logistic Regression Baseline vs. Random Forest Classifier',
+                '5-Fold Cross-Validation',
+                'Feature Importance Analysis',
+                'Bias/Fairness Testing across departments'
+            ]
+        },
+        deliverables: [
+            'Salifort-Motors-Retention GitHub Repository',
+            'Interactive Power BI Dashboard',
+            'Trained Model Artifacts (salifort_model.pkl)',
+            'Comprehensive Executive Report',
+            'Strategic Presentation Deck'
+        ],
+        impact: [
+            '**Attrition Prevention**: Achieved 96.36% Recall, successfully identifying nearly all at-risk employees to prevent attrition.',
+            '**Key Driver Analysis**: Quantified Satisfaction Level as the dominant driver (34.9% importance), revealing a stark 0.23 gap between stayers and leavers.',
+            '**Workload Insights**: Uncovered a 100% churn rate for employees managing 7 concurrent projects, providing immediate evidence for workload caps.'
+        ],
+        documentationUrl: '',
+        githubUrl: ''
+    },
+    {
         id: 'idx-credit-risk',
         title: 'End-to-End Credit Risk Modeling and Dashboarding for ID/X Partners',
         logo: '/logos/logo-idx-partners.png',
