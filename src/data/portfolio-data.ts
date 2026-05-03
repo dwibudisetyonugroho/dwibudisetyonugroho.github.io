@@ -702,8 +702,8 @@ export const PROJECTS = [
             '**Key Driver Analysis**: Quantified Satisfaction Level as the dominant driver (34.9% importance), revealing a stark 0.23 gap between stayers and leavers.',
             '**Workload Insights**: Uncovered a 100% churn rate for employees managing 7 concurrent projects, providing immediate evidence for workload caps.'
         ],
-        documentationUrl: '',
-        githubUrl: ''
+        documentationUrl: '/docs/Salifort-Motors-Retention-Documentation.pdf',
+        githubUrl: 'https://github.com/dwibudisetyonugroho/Salifort-Motors-Retention'
     },
     {
         id: 'idx-credit-risk',
@@ -928,6 +928,7 @@ export const DETAILED_SKILLS: DetailedSkill[] = [
         icon: 'Code2',
         description: 'I utilize VS Code as my central integrated development environment for writing, debugging, and version-controlling code. I leverage extensions for Git integration, Markdown previewing, and Python linting to ensure code quality, while managing virtual environments (venv) and package installations directly via the integrated terminal.',
         appliedIn: [
+            { label: 'Salifort Motors', link: '#salifort-motors-retention' },
             { label: 'IDX Partners', link: '#idx-credit-risk' },
             { label: 'Kimia Farma', link: '#kimia-farma-performance' },
             { label: 'Bank Muamalat', link: '#pt-sejahtera-bersama' }
@@ -939,6 +940,7 @@ export const DETAILED_SKILLS: DetailedSkill[] = [
         icon: 'BookOpen',
         description: 'I create reproducible research narratives that combine executable code, rich text explanations (Markdown), and visualizations into a single linear story. I use notebooks for rapid prototyping of Exploratory Data Analysis (EDA) and hypothesis testing, ensuring every step from data loading to model serialization is self-documented for non-technical review.',
         appliedIn: [
+            { label: 'Salifort Motors Retention Project', link: '#salifort-motors-retention' },
             { label: 'IDX Partners Credit Risk Project', link: '#idx-credit-risk' }
         ],
         skills: ['EDA', 'Markdown', 'Data Visualization', 'Hypothesis Testing', 'Prototyping']
@@ -968,6 +970,7 @@ export const DETAILED_SKILLS: DetailedSkill[] = [
         icon: 'Database',
         description: 'I execute efficient in-tool ETL processes, performing advanced data shaping such as dynamic column type conversion, date extraction, and custom column creation without altering source data.',
         appliedIn: [
+            { label: 'Salifort Motors Retention Project', link: '#salifort-motors-retention' },
             { label: 'IDX Partners Credit Risk Project', link: '#idx-credit-risk' }
         ],
         skills: ['ETL', 'Data Shaping', 'Column Profiling', 'M Language', 'Source Connectors']
@@ -977,6 +980,7 @@ export const DETAILED_SKILLS: DetailedSkill[] = [
         icon: 'Terminal',
         description: 'I architect robust end-to-end data pipelines using Pandas to transform raw, messy datasets into analysis-ready formats through complex cleaning, strategic imputation, and leakage prevention. I leverage Matplotlib and Seaborn in tandem to rapidly prototype high-fidelity visualizations that uncover hidden risk patterns and communicate statistical distributions with clarity.',
         appliedIn: [
+            { label: 'Salifort Motors Retention Project', link: '#salifort-motors-retention' },
             { label: 'IDX Partners Credit Risk Project', link: '#idx-credit-risk' }
         ],
         skills: ['Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'Scikit-Learn']
@@ -986,6 +990,7 @@ export const DETAILED_SKILLS: DetailedSkill[] = [
         icon: 'Cpu',
         description: 'I implement strategic machine learning solutions using Scikit-Learn, specializing in diagnosing and resolving severe class imbalance. I perform rigorous feature engineering (One-Hot Encoding, Standard Scaling), conduct model selection between linear and ensemble approaches based on business KPIs, and ensure model integrity by auditing for data leakage.',
         appliedIn: [
+            { label: 'Salifort Motors Retention Project', link: '#salifort-motors-retention' },
             { label: 'IDX Partners Credit Risk Project', link: '#idx-credit-risk' }
         ],
         skills: ['Scikit-Learn', 'Feature Engineering', 'Model Selection', 'Data Leakage Auditing', 'Imbalance Handling']
@@ -995,6 +1000,7 @@ export const DETAILED_SKILLS: DetailedSkill[] = [
         icon: 'BarChart3',
         description: 'I design executive-level, multi-page interactive dashboards that translate complex statistical findings into actionable business insights. My capabilities include developing high-impact KPI cards, building geospatial filled maps, and implementing filters for granular portfolio analysis.',
         appliedIn: [
+            { label: 'Salifort Motors Retention Project', link: '#salifort-motors-retention' },
             { label: 'IDX Partners Credit Risk Project', link: '#idx-credit-risk' }
         ],
         skills: ['DAX', 'Power Query', 'Data Modeling', 'KPI Dashboards', 'Geospatial Visualization']
@@ -1014,6 +1020,7 @@ export const DETAILED_SKILLS: DetailedSkill[] = [
         icon: 'Presentation',
         description: 'I construct strategic executive decks that flow logically from Business Context to Methodology, Technical Implementation, and Strategic Recommendations. I integrate high-resolution dashboard screenshots with callout boxes and annotations to guide audience focus, utilizing corporate branding and clean layouts to deliver board-ready presentations.',
         appliedIn: [
+            { label: 'Salifort Motors', link: '#salifort-motors-retention' },
             { label: 'IDX Partners', link: '#idx-credit-risk' },
             { label: 'Kimia Farma', link: '#kimia-farma-performance' },
             { label: 'Bank Muamalat', link: '#pt-sejahtera-bersama' }
@@ -1025,6 +1032,7 @@ export const DETAILED_SKILLS: DetailedSkill[] = [
         icon: 'FileText',
         description: 'I author comprehensive technical artifacts, including detailed Data Dictionaries that define schema granularity and explicit business logic formulas. I craft executive-level README files that serve as professional project landing pages, streamlining business context summarization, tech stacks, key insights, and deployment links to ensure seamless stakeholder handover and long-term project reproducibility.',
         appliedIn: [
+            { label: 'Salifort Motors', link: '#salifort-motors-retention' },
             { label: 'IDX Partners', link: '#idx-credit-risk' },
             { label: 'Kimia Farma', link: '#kimia-farma-performance' },
             { label: 'Bank Muamalat', link: '#pt-sejahtera-bersama' }
@@ -1036,6 +1044,7 @@ export const DETAILED_SKILLS: DetailedSkill[] = [
         icon: 'GitBranch',
         description: 'I manage professional repository structures with logical hierarchies and comprehensive README.md files. I maintain clean commit histories with meaningful messages, track changes effectively to ensure reproducible deployment and portfolio presentation.',
         appliedIn: [
+            { label: 'Salifort Motors', link: '#salifort-motors-retention' },
             { label: 'IDX Partners', link: '#idx-credit-risk' },
             { label: 'Kimia Farma', link: '#kimia-farma-performance' },
             { label: 'Bank Muamalat', link: '#pt-sejahtera-bersama' }
