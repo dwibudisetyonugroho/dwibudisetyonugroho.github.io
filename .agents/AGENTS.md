@@ -57,7 +57,7 @@
 - **Logo Container Isolation**: `AnimatedLogo` must be rendered inside a fixed-width container (`w-[108px] shrink-0`) to prevent text changes from shifting neighboring nav links. Bracket hugging (`['` and `']`) around cycling words (`DBS`, `have`, `a`, `good`, `day`) must use an inner `<motion.div layout>` transition confined strictly within the fixed logo box.
 - **Navbar Geometry & Spacing**: The top navbar position must use full horizontal width with identical top, left, and right outer gaps (`top-4 sm:top-6 left-4 sm:left-6 right-4 sm:right-6`) and squarish corners (`rounded-2xl`). Inner flex gaps around action buttons and between badge icons must maintain uniform $8\text{px}$ spacing (`gap-2`, `pr-2`, `py-2`).
 - **Mandatory Card Wrapper `id={item.id}`**: Every candidate profile card in `CertificatesSection`, `CertificationsSection`, `ProjectsSection`, and `InternshipsSection` MUST be wrapped in `<div key={item.id} id={item.id} className="scroll-mt-24 w-full">`.
-- **Registered Sub-ID Scroll Tracking**: Navigation scroll observers MUST filter `querySelectorAll('[id]')` strictly against `validSubIds` matching registered section dataset items to trigger orange progress indicator dots accurately without being confused by internal SVG clipPaths or accordion IDs.
+- **Registered Sub-ID Scroll Tracking & Sub-Page Dot Indicators**: Navigation scroll observers MUST resolve section items dynamically using `navItems.find(...)` (not hardcoded `NAVIGATION_ITEMS`) and filter `querySelectorAll('[id]')` strictly against `validSubIds` matching registered dataset items. On sub-pages like `/projects/`, set `hasDropdown = !isProjectsPage && dropdownItems.length > 0` so orange progress indicator dots render under active links without triggering hover dropdown menus.
 - **Dropdown Hover Bridge & Fast Dismissal**: Floating navigation dropdowns positioned at `top-16` must include an invisible top pseudo-element (`before:content-[''] before:absolute before:-top-4 before:h-4`) to bridge cursor movement without visual overlap. Mouse-leave timers (`handleMouseLeaveNav`) and exit transition durations must remain snappy ($\le 80\text{ms}$).
 
 ## Parallax & Page Background Rules
@@ -68,7 +68,7 @@
 ## Domain, Metadata & Static Export Rules
 - **Dual-Domain Resolution**: Maintain primary domain `https://budinugroho.com` and fallback `https://dwibudisetyonugroho.github.io` in `site-config.ts`.
 - **Static Export Metadata**: All metadata route generators (`sitemap.ts`, `manifest.ts`) MUST include `export const dynamic = 'force-static'`.
-- **Strict Build Validation**: Ensure `npx tsc --noEmit` and build checks pass without errors.
+- **Strict Build Validation & Type Alias Standard**: Ensure `npx tsc --noEmit` and `npm run build` pass without errors. Avoid empty interfaces extending other interfaces (`export interface Foo extends Bar {}`) to satisfy `@typescript-eslint/no-empty-object-type`; use type aliases (`export type Foo = Bar`) instead.
 
 ## Agent Configuration & Hygiene
 - **Dot-Folder Placement**: Maintain agent instructions inside `.agents/` (`AGENTS.md`, `CARD_SPEC.md`, `INDEX.md`). Keep the project root clean.
