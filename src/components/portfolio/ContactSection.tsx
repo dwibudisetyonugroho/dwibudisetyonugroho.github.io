@@ -2,7 +2,7 @@
 
 import { Mail, Phone, MapPin, Linkedin, Github } from 'lucide-react'
 import { motion, Variants } from 'framer-motion'
-import { CONTACT_INFO } from '@/data/portfolio-data'
+import { CONTACT_INFO } from '@/data'
 import { toast } from 'sonner'
 import { cardHoverVariants } from '@/lib/animations'
 
@@ -97,10 +97,7 @@ export const ContactSection = () => {
     }
 
     return (
-        <section id="contact" className="py-24 bg-gray-50 relative overflow-hidden">
-            {/* Subtle Background Elements */}
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
-            
+        <section id="contact" className="py-24 bg-transparent relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}

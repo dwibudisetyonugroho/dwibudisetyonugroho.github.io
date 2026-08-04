@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback, memo } from 'react'
-import { DETAILED_SKILLS } from '@/data/portfolio-data'
+import { DETAILED_SKILLS } from '@/data'
 import {
     ChevronRight,
     GripVertical
@@ -18,7 +18,7 @@ const SkillButton = memo(({ skill, index, isActive, onClick }: {
 }) => (
     <button
         onClick={() => onClick(index)}
-        className={`px-3 sm:px-4 h-[60px] text-sm font-bold border transition-all duration-300 item-hover flex items-center text-left w-full relative overflow-hidden group ${
+        className={`px-3 sm:px-4 h-[60px] text-sm font-bold border transition-all duration-300 item-hover flex items-center text-left w-full relative overflow-hidden group active:scale-[0.985] select-none ${
             isActive 
                 ? 'bg-[#023047] text-white border-[#023047] shadow-md z-10' 
                 : 'bg-white text-black/70 border-slate-200 hover:bg-slate-50 hover:text-black hover:border-slate-300'
@@ -131,7 +131,7 @@ export const SkillsSection = () => {
     }
 
     return (
-        <section id="skills" className="py-24 bg-gray-200">
+        <section id="skills" className="py-24 bg-transparent">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12">
                     <h2 className="text-4xl font-bold text-foreground mb-4">Technical Skill</h2>

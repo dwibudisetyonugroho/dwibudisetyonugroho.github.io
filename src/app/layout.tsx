@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
-import { Toaster as ShadcnToaster } from "@/components/ui/toaster";
 import { Toaster as SonnerToaster } from "sonner";
+import { SITE_CONFIG, getPersonSchema } from "@/lib/site-config";
+import { MotionProvider } from "@/components/portfolio/MotionProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
-// Force rebuild for GitHub Pages cache bust
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -21,38 +21,60 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dwi Budi Setyonugroho | Data Analyst Portfolio",
-  description: "Entry-level Data Analyst specializing in transforming complex data into actionable insights. Expertise in Python, SQL, Excel, data visualization, and predictive modeling. IBM Data Analyst Professional Certificate holder.",
+  metadataBase: new URL(SITE_CONFIG.primaryDomain),
+  title: {
+    default: SITE_CONFIG.title,
+    template: "%s | Dwi Budi Setyonugroho",
+  },
+  description: SITE_CONFIG.description,
   keywords: [
     "Data Analyst",
     "Data Analytics",
     "Python",
     "SQL",
+    "PostgreSQL",
+    "Power BI",
     "Excel",
     "Data Visualization",
     "Business Intelligence",
+    "Predictive Modeling",
     "IBM Certified",
+    "Google Certified",
+    "DataCamp Certified",
     "Dwi Budi Setyonugroho",
     "Portfolio"
   ],
-  authors: [{ name: "Dwi Budi Setyonugroho" }],
+  authors: [{ name: SITE_CONFIG.name, url: SITE_CONFIG.primaryDomain }],
+  creator: SITE_CONFIG.name,
   icons: {
     icon: "/favicon.ico",
   },
+  alternates: {
+    canonical: SITE_CONFIG.primaryDomain,
+  },
   openGraph: {
-    title: "Dwi Budi Setyonugroho | Data Analyst Portfolio",
-    description: "Entry-level Data Analyst specializing in transforming complex data into actionable insights through Python, SQL, and advanced analytics.",
+    title: SITE_CONFIG.title,
+    description: SITE_CONFIG.description,
+    url: SITE_CONFIG.primaryDomain,
+    siteName: SITE_CONFIG.name,
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dwi Budi Setyonugroho | Data Analyst",
-    description: "Data Analyst Portfolio - Python, SQL, Excel, Data Visualization & Business Intelligence",
+    title: SITE_CONFIG.title,
+    description: SITE_CONFIG.description,
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 };
 
@@ -61,16 +83,26 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const personSchema = getPersonSchema();
+
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} antialiased bg-background text-foreground`}
         suppressHydrationWarning
       >
-        {children}
-        <ShadcnToaster />
+        <MotionProvider>
+          {children}
+        </MotionProvider>
         <SonnerToaster position="bottom-right" richColors />
       </body>
     </html>
   );
 }
+

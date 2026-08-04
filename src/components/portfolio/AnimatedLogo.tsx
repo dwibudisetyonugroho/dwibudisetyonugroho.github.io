@@ -36,49 +36,38 @@ export const AnimatedLogo = () => {
 
     return (
         <div
-            className="relative cursor-pointer flex items-center h-8"
+            className="relative cursor-pointer flex items-center justify-center h-8 w-[108px] shrink-0"
             onMouseEnter={() => {
                 setIsHovered(true)
                 triggerAnimation()
             }}
             onMouseLeave={() => setIsHovered(false)}
         >
-            <div className="flex items-center">
+            <motion.div
+                layout
+                transition={{
+                    type: "spring",
+                    stiffness: 350,
+                    damping: 28
+                }}
+                className="flex items-center justify-center"
+            >
                 <motion.span
-                    layout
-                    initial={{ width: 0, opacity: 0 }}
+                    initial={{ opacity: 0, scale: 0.8 }}
                     animate={{
-                        width: showBrackets ? 'auto' : 0,
-                        opacity: showBrackets ? 1 : 0
+                        opacity: showBrackets ? 1 : 0,
+                        scale: showBrackets ? 1 : 0.8,
                     }}
-                    transition={{
-                        type: "spring",
-                        stiffness: 350,
-                        damping: 28,
-                        layout: {
-                            type: "spring",
-                            stiffness: 350,
-                            damping: 28
-                        }
-                    } as any}
-                    className="overflow-hidden whitespace-nowrap text-2xl font-bold text-black font-mono"
+                    transition={{ duration: 0.2 }}
+                    className="whitespace-nowrap text-2xl font-bold text-black font-mono shrink-0 select-none pr-0.5"
                 >
                     ['
                 </motion.span>
 
-                <motion.div
-                    layout
-                    className="relative overflow-hidden h-8 flex items-center"
-                    transition={{
-                        type: "spring",
-                        stiffness: 350,
-                        damping: 28
-                    } as any}
-                >
+                <div className="relative overflow-hidden h-8 flex items-center justify-center">
                     <AnimatePresence mode="popLayout">
                         <motion.span
                             key={currentWordIndex}
-                            layout
                             initial={{ y: 20, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             exit={{ y: -20, opacity: 0 }}
@@ -86,36 +75,26 @@ export const AnimatedLogo = () => {
                                 type: "spring",
                                 stiffness: 300,
                                 damping: 25
-                            } as any}
-                            className="text-2xl font-extrabold tracking-tight font-inter text-black whitespace-nowrap block"
+                            }}
+                            className="text-2xl font-extrabold tracking-tight font-inter text-black whitespace-nowrap block text-center select-none"
                         >
                             {words[currentWordIndex]}
                         </motion.span>
                     </AnimatePresence>
-                </motion.div>
+                </div>
 
                 <motion.span
-                    layout
-                    initial={{ width: 0, opacity: 0 }}
+                    initial={{ opacity: 0, scale: 0.8 }}
                     animate={{
-                        width: showBrackets ? 'auto' : 0,
-                        opacity: showBrackets ? 1 : 0
+                        opacity: showBrackets ? 1 : 0,
+                        scale: showBrackets ? 1 : 0.8,
                     }}
-                    transition={{
-                        type: "spring",
-                        stiffness: 350,
-                        damping: 28,
-                        layout: {
-                            type: "spring",
-                            stiffness: 350,
-                            damping: 28
-                        }
-                    } as any}
-                    className="overflow-hidden whitespace-nowrap text-2xl font-bold text-black font-mono"
+                    transition={{ duration: 0.2 }}
+                    className="whitespace-nowrap text-2xl font-bold text-black font-mono shrink-0 select-none pl-0.5"
                 >
                     ']
                 </motion.span>
-            </div>
+            </motion.div>
         </div>
     )
 }

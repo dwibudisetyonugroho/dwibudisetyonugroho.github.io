@@ -45,14 +45,14 @@ export const AnimatedNavLink = ({
             >
 
                 {/* Text Container - now relative to house the dots strictly under the text */}
-                <span className="relative z-10 flex flex-col items-center">
+                <span className="relative z-10 flex flex-col items-center text-lg font-medium">
                     <span className={`transition-colors duration-200 ${isActive || isHovered ? 'text-[#FF5B00]' : 'text-black'}`}>
                         {text}
                     </span>
 
-                    {/* Progress Dots Indicator - strictly under text */}
+                    {/* Progress Dots Indicator - strictly under text (disabled for Skill section) */}
                     <AnimatePresence>
-                        {isActive && subItems.length > 0 && (
+                        {isActive && text.toLowerCase() !== 'skill' && subItems.length > 0 && (
                             <motion.div 
                                 initial={{ opacity: 0, y: -2 }}
                                 animate={{ opacity: 1, y: 0 }}

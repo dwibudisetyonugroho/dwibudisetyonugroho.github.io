@@ -1,0 +1,67 @@
+# Antigravity AI Token Optimization Ignore Rules
+# Primary source of truth for ignoring non-essential, auto-generated, and binary files during AI search & context indexing.
+
+# Dependencies & Lockfiles (saves >500KB context bloat per indexing pass)
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+bun.lockb
+
+# Build Outputs & Next.js Caches
+.next/
+.next-dev/
+out/
+build/
+dist/
+*.tsbuildinfo
+next-env.d.ts
+.vercel/
+
+# Logs & Diagnostics
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+error.log
+dev.log
+server.log
+
+# Binary & Large Media Assets (AI searches do not need raw raster binaries or PDFs)
+public/**/*
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
+*.ico
+*.svg
+*.mp4
+*.webm
+*.zip
+*.tar.gz
+
+# System & Workspace Files
+.git/
+.DS_Store
+*.pem
+*.key
+*.code-workspace
+.vscode/
+.idea/
+
+# Scratch & Transcripts
+scratch/
+*.jsonl
+
+# Additional Caches & Generated Files
+.turbo/
+.cache/
+.swc/
+coverage/
+*.map
+
+# Note: .agents/ and /src/app/ticket/ are explicitly kept UNIGNORED so Antigravity AI can read rules and experiment cards.
+

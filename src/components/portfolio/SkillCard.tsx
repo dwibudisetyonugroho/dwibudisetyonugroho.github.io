@@ -3,7 +3,7 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { motion } from "framer-motion"
 import { LucideIcon, ExternalLink } from "lucide-react"
-import { DetailedSkill } from "@/data/portfolio-data"
+import { DetailedSkill } from "@/data"
 import { cardHoverVariants } from "@/lib/animations"
 import { SkillsList } from "./SkillsList"
 

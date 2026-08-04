@@ -15,6 +15,7 @@
 
 # next.js
 /.next/
+/.next-dev/
 /out/
 
 # production
@@ -50,3 +51,7 @@ test
 prompt
 
 server.log
+# Experiments
+/src/app/ticket/
+/src/components/portfolio/TicketCardExperiment.tsx
+/src/components/portfolio/TicketCardExperiment2.tsx
