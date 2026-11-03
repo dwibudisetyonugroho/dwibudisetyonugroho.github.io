@@ -32,18 +32,20 @@ export default function WelcomePortal() {
       {/* Static top-aligned background image matching /profile/ page texture without parallax */}
       <ParallaxBackground imageSrc="/images/pine_forest.webp" disableParallax={true} backgroundPosition="center top" />
 
-      {/* Top Right Experimentation Button */}
-      <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20">
-        <Link 
-          href="/ticket" 
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 hover:bg-white border border-slate-300/60 text-xs font-mono font-bold text-slate-700 hover:text-slate-900 transition-all active:scale-[0.985] shadow-sm select-none"
-        >
-          <span className="relative flex h-2 w-2">
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#fb8500]"></span>
-          </span>
-          <span>EXPERIMENTATION</span>
-        </Link>
-      </div>
+      {/* Top Right Experimentation Button (Local Development Only) */}
+      {process.env.NODE_ENV === 'development' && (
+        <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20">
+          <Link 
+            href="/ticket" 
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 hover:bg-white border border-slate-300/60 text-xs font-mono font-bold text-slate-700 hover:text-slate-900 transition-all active:scale-[0.985] shadow-sm select-none"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#fb8500]"></span>
+            </span>
+            <span>EXPERIMENTATION</span>
+          </Link>
+        </div>
+      )}
 
       <main className="flex-1 flex flex-col items-center justify-center px-4 py-16 max-w-6xl mx-auto w-full relative z-10">
         {/* Header Block */}
